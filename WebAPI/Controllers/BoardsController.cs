@@ -1,6 +1,6 @@
 ﻿using Application.Commands;
 using Application.Queries;
-using Domain.Entities;
+using Infrastructure.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;

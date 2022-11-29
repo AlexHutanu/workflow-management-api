@@ -2,7 +2,7 @@
 using Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Activity = Domain.Entities.Activity;
+using Activity = Infrastructure.Entities.Activity;
 
 namespace WebAPI.Controllers;
 
