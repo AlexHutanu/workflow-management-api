@@ -2,9 +2,9 @@ using Application.Queries;
 using Infrastructure.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using WorkflowManagement.Data;
+using Infrastructure.Data;
 
-namespace Application.Handlers.UserHandler;
+namespace Application.Handlers.UserHandlers;
 
 
 public class GetUserQueryHandler : IRequestHandler<GetUserQuery, User>
@@ -19,7 +19,7 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, User>
 
     public async Task<User> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
-        return await _context.User.FirstAsync(user => user.Name == request.Name,
+        return await _context.Users.FirstAsync(user => user.Id == request.Id,
             cancellationToken: cancellationToken);
     }
 }

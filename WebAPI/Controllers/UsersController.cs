@@ -19,9 +19,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([FromBody] User body)
+        public async Task<IActionResult> Index([FromBody] User user)
         {
-            var command = new CreateUserCommand() { NewUser = body };
+            var command = new CreateUserCommand() {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                Password = user.Password
+            };
             var result = await _mediator.Send(command);
 
             return Ok(result);
@@ -29,9 +34,9 @@ namespace WebAPI.Controllers
 
         [Authorize]
         [HttpGet("username")]
-        public async Task<IActionResult> Index(string userName)
+        public async Task<IActionResult> Index(Guid userId)
         {
-            var result = await _mediator.Send(new GetUserQuery(userName));
+            var result = await _mediator.Send(new GetUserQuery(userId));
 
             return Ok(result);
         }

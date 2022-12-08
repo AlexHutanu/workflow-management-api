@@ -6,11 +6,11 @@ namespace Application.Queries
 
     public class GetUserQuery : IRequest<User>
     {
-        public string? Name { get; set; }
+        public Guid Id { get; }
 
-        public GetUserQuery(string name)
+        public GetUserQuery(Guid id)
         {
-            Name = name;
+            Id = id;
         }
     }
 }

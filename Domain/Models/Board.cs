@@ -5,18 +5,13 @@ namespace Domain.Models;
 
 public class Board
 {
-    [Key]
     public int Id { get; set; }
 
-    [Column("Name", TypeName = "varchar(200)")]
     public string? Name { get; set; }
-    
-    [Column("OwnerName", TypeName = "varchar(200)")]
+   
     public string? Owner { get; set; }
 
-    [Column("Description", TypeName = "varchar(200)")]
     public string? Description { get; set; }
 
-    [Column("NoOfTickets", TypeName = "varchar(200)")]
     public int NoOfTickets { get; set; }
 }

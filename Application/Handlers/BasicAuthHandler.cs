@@ -6,7 +6,7 @@ using Infrastructure.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WorkflowManagement.Data;
+using Infrastructure.Data;
 
 namespace Application.Handlers
 {
@@ -30,7 +30,7 @@ namespace Application.Handlers
                 var bytes = Convert.FromBase64String(authenticationHeaderValue.Parameter);
                 var credentials = Encoding.UTF8.GetString(bytes);
 
-                User user = _context.User.FirstOrDefault(user => user.Name == credentials);
+                User user = _context.Users.FirstOrDefault(user => user.Name == credentials);
 
                 if (user == null)
                 {

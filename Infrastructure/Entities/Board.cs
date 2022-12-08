@@ -6,7 +6,7 @@ namespace Infrastructure.Entities;
 public class Board
 {
     [Key]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Column("Name", TypeName = "varchar(200)")]
     public string? Name { get; set; }

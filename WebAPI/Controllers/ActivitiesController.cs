@@ -20,18 +20,24 @@ public class ActivitiesController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index([FromBody] Activity body)
+    public async Task<IActionResult> Index([FromBody] Activity activity)
     {
-        var command = new CreateActivityCommand() { NewActivity = body };
+        var command = new CreateActivityCommand() {
+            Id = activity.Id,
+            Name = activity.Name,
+            Description = activity.Description,
+            Owner = activity.Owner,
+            TimeCreated= activity.TimeCreated,
+        };
         var result = await _mediator.Send(command);
         return Ok(result);
     }
 
     [HttpGet("{activityName}")]
-    public async Task<IActionResult> Index(string activityName)
+    public async Task<IActionResult> Index(Guid activityId)
     {
 
-        var result = await _mediator.Send(new GetActivityQuery(activityName));
+        var result = await _mediator.Send(new GetActivityQuery(activityId));
 
         return Ok(result);
     }

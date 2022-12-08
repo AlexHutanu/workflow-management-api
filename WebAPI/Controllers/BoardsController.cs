@@ -21,19 +21,25 @@ public class BoardsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index([FromBody] Board body)
+    public async Task<IActionResult> Index([FromBody] Board board)
     {
 
-        var command = new CreateBoardCommand() { NewBoard = body };
+        var command = new CreateBoardCommand() {
+            Id = board.Id,
+            Name = board.Name,
+            Description = board.Description,
+            NoOfTickets = board.NoOfTickets,
+            Owner = board.Owner,
+        };
         var result = await _mediator.Send(command);
         return Ok(result);
     }
 
     [HttpGet("{boardName}")]
-    public async  Task<ActionResult<Board>> Index(string boardName)
+    public async  Task<ActionResult<Board>> Index(Guid boardId)
     {
 
-        var result = await _mediator.Send(new GetBoardQuery(boardName));
+        var result = await _mediator.Send(new GetBoardQuery(boardId));
         
         return Ok(result);
     }

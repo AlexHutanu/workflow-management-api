@@ -6,11 +6,11 @@ namespace Application.Queries
 
     public class GetBoardQuery : IRequest<Board>
     {
-        public string? Name { get; }
+        public Guid Id { get; }
 
-        public GetBoardQuery(string name)
+        public GetBoardQuery(Guid id)
         {
-            Name = name;
+            Id = id;
         }
     }
 }

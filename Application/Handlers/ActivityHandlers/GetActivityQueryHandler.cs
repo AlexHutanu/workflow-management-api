@@ -2,9 +2,9 @@ using Application.Queries;
 using Infrastructure.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using WorkflowManagement.Data;
+using Infrastructure.Data;
 
-namespace Application.Handlers.ActivityHandler
+namespace Application.Handlers.ActivityHandlers
 {
 
     public class GetActivityQueryHandler : IRequestHandler<GetActivityQuery, Activity>
@@ -19,7 +19,7 @@ namespace Application.Handlers.ActivityHandler
 
         public async Task<Activity> Handle(GetActivityQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Activity.FirstAsync(activity => activity.Name == request.Name,
+            return await _context.Activities.FirstAsync(activity => activity.Id == request.Id,
                 cancellationToken: cancellationToken);
         }
     }

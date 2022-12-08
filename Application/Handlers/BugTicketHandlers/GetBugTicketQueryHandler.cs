@@ -2,7 +2,7 @@ using Application.Queries;
 using Infrastructure.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using WorkflowManagement.Data;
+using Infrastructure.Data;
 
 namespace Application.Handlers.BugTicketHandlers
 {
@@ -19,7 +19,7 @@ namespace Application.Handlers.BugTicketHandlers
 
         public async Task<BugTicket> Handle(GetBugTicketQuery request, CancellationToken cancellationToken)
         {
-            return await _context.BugTicket.FirstAsync(bugTicket => bugTicket.Name == request.Name,
+            return await _context.BugTickets.FirstAsync(bugTicket => bugTicket.Id == request.Id,
                 cancellationToken: cancellationToken);
         }
     }

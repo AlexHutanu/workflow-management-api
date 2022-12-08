@@ -6,11 +6,11 @@ namespace Application.Queries
 
     public class GetActivityQuery : IRequest<Activity>
     {
-        public string? Name { get; }
+        public Guid Id { get; }
 
-        public GetActivityQuery(string name)
+        public GetActivityQuery(Guid id)
         {
-            Name = name;
+            Id = id;
         }
     }
 }

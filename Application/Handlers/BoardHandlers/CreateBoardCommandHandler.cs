@@ -1,7 +1,8 @@
 using Application.Commands;
 using Infrastructure.Entities;
 using MediatR;
-using WorkflowManagement.Data;
+using Infrastructure.Data;
+using Infrastructure.Interfaces.IConfiguration;
 
 namespace Application.Handlers.BoardHandlers
 {
@@ -9,19 +10,28 @@ namespace Application.Handlers.BoardHandlers
     public class CreateBoardCommandHandler : IRequestHandler<CreateBoardCommand, Board>
     {
 
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateBoardCommandHandler(ApplicationDbContext context)
+        public CreateBoardCommandHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Board> Handle(CreateBoardCommand request, CancellationToken cancellationToken)
         {
-            _context.Boards.Add(request.NewBoard);
-            await _context.SaveChangesAsync(cancellationToken);
+            var board = new Board
+            {
+                Id = request.Id,
+                Name = request.Name,
+                Owner = request.Owner,
+                Description = request.Description,
+                NoOfTickets = request.NoOfTickets,
+            };
 
-            return request.NewBoard;
+            await _unitOfWork.Boards.Add(board);
+            await _unitOfWork.CompleteAsync();
+
+            return board;
         }
     }
 }

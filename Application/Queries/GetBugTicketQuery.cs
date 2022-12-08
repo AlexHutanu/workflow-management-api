@@ -6,11 +6,11 @@ namespace Application.Queries
 
     public class GetBugTicketQuery : IRequest<BugTicket>
     {
-        public string? Name { get; }
+        public Guid Id { get; }
 
-        public GetBugTicketQuery(string name)
+        public GetBugTicketQuery(Guid id)
         {
-            Name = name;
+            Id = id;
         }
     }
 }

@@ -2,7 +2,7 @@ using Application.Queries;
 using Infrastructure.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using WorkflowManagement.Data;
+using Infrastructure.Data;
 
 namespace Application.Handlers.BoardHandlers
 {
@@ -17,7 +17,7 @@ namespace Application.Handlers.BoardHandlers
 
         public async Task<Board> Handle(GetBoardQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Boards.FirstAsync(board => board.Name == request.Name, cancellationToken: cancellationToken);
+            return await _context.Boards.FirstAsync(board => board.Id == request.Id, cancellationToken: cancellationToken);
         }
     }
 }
