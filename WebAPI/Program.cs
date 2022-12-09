@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMediatR(typeof(CreateActivityCommandHandler));
+builder.Services.AddMediatR(typeof(CreateActivityHandler));
 
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);

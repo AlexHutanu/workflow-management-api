@@ -16,7 +16,6 @@ namespace Infrastructure.Data
         private readonly ILogger _logger;
 
         public IUserRepository? Users { get; private set;}
-
         public IBugTicketRepository? BugTickets { get; private set; }
 
         public IBoardRepository? Boards { get; private set; }

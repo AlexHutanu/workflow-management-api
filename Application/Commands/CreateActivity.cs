@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Commands
 {
-    public class CreateActivityCommand : IRequest<Activity>
+    public class CreateActivity : IRequest<Activity>
     {
         public Guid Id { get; set; }
 

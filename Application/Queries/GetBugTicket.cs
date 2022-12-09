@@ -4,11 +4,11 @@ using MediatR;
 namespace Application.Queries
 {
 
-    public class GetActivityQuery : IRequest<Activity>
+    public class GetBugTicket : IRequest<BugTicket>
     {
         public Guid Id { get; }
 
-        public GetActivityQuery(Guid id)
+        public GetBugTicket(Guid id)
         {
             Id = id;
         }

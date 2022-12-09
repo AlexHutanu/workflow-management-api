@@ -7,17 +7,17 @@ using Infrastructure.Data;
 namespace Application.Handlers.BugTicketHandlers
 {
 
-    public class GetBugTicketQueryHandler : IRequestHandler<GetBugTicketQuery, BugTicket>
+    public class GetBugTicketHandler : IRequestHandler<GetBugTicket, BugTicket>
     {
 
         private readonly ApplicationDbContext _context;
 
-        public GetBugTicketQueryHandler(ApplicationDbContext context)
+        public GetBugTicketHandler(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<BugTicket> Handle(GetBugTicketQuery request, CancellationToken cancellationToken)
+        public async Task<BugTicket> Handle(GetBugTicket request, CancellationToken cancellationToken)
         {
             return await _context.BugTickets.FirstAsync(bugTicket => bugTicket.Id == request.Id,
                 cancellationToken: cancellationToken);

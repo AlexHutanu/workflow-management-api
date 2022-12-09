@@ -7,17 +7,17 @@ using Infrastructure.Interfaces.IConfiguration;
 namespace Application.Handlers.BugTicketHandlers
 {
 
-    public class CreateBugTicketCommandHandler : IRequestHandler<CreateBugTicketCommand, BugTicket>
+    public class CreateBugTicketHandler : IRequestHandler<CreateBugTicket, BugTicket>
     {
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateBugTicketCommandHandler(IUnitOfWork unitOfWork)
+        public CreateBugTicketHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<BugTicket> Handle(CreateBugTicketCommand request, CancellationToken cancellationToken)
+        public async Task<BugTicket> Handle(CreateBugTicket request, CancellationToken cancellationToken)
         {
 
             var bugTicket = new BugTicket

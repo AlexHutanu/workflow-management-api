@@ -22,7 +22,7 @@ public class BugTicketsController : Controller
     [HttpPost]
     public async Task<IActionResult> Index([FromBody] BugTicket bugTicket)
     {
-        var command = new CreateBugTicketCommand() {
+        var command = new CreateBugTicket() {
             Id = bugTicket.Id,
             Name = bugTicket.Name,
             Asignee = bugTicket.Asignee,
@@ -42,7 +42,54 @@ public class BugTicketsController : Controller
     [HttpGet("{ticketName}")]
     public async Task<IActionResult> Index(Guid ticketId)
     {
-        var result = await _mediator.Send(new GetBugTicketQuery(ticketId));
+        var result = await _mediator.Send(new GetBugTicket(ticketId));
+
+        return Ok(result);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetBugTickets()
+    {
+        var result = await _mediator.Send(new GetAllBugTickets());
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{bugTicketId}")]
+    public async Task<IActionResult> DeleteUser(Guid bugTicketId)
+    {
+        var command = new DeleteBugTicket { BugTicketId = bugTicketId };
+        var result = await _mediator.Send(command);
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(result);
+    }
+
+    [HttpPut("{bugTicketId}")]
+    public async Task<IActionResult> UpdateBugTicket(Guid bugTicketId, [FromBody] BugTicket bugTicket)
+    {
+        var command = new UpdateBugTicket
+        {
+
+            BugTicketId = bugTicketId,
+            Description = bugTicket.Description,
+            Name = bugTicket.Name,
+            Asignee= bugTicket.Asignee,
+            Deadline= bugTicket.Deadline,
+            Status= bugTicket.Status,
+            StepsToReproduce= bugTicket.StepsToReproduce,
+            ExpectedResult= bugTicket.ExpectedResult,
+            ActualResult= bugTicket.ActualResult,
+        };
+
+        var result = await _mediator.Send(command);
+
+        if (result == null)
+            return NotFound();
 
         return Ok(result);
     }

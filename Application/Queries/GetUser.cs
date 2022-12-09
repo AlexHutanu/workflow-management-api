@@ -4,11 +4,11 @@ using MediatR;
 namespace Application.Queries
 {
 
-    public class GetBoardQuery : IRequest<Board>
+    public class GetUser : IRequest<User>
     {
         public Guid Id { get; }
 
-        public GetBoardQuery(Guid id)
+        public GetUser(Guid id)
         {
             Id = id;
         }

@@ -6,7 +6,7 @@ namespace Infrastructure.Data;
 public class ApplicationDbContext : DbContext
 {
 
-    public ApplicationDbContext() { }
+    public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

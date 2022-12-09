@@ -7,17 +7,17 @@ using Infrastructure.Interfaces.IConfiguration;
 namespace Application.Handlers.UserHandlers
 {
 
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
+    public class CreateUserHandler : IRequestHandler<CreateUser, User>
     {
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateUserCommandHandler(IUnitOfWork unitOfWork)
+        public CreateUserHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<User> Handle(CreateUser request, CancellationToken cancellationToken)
         {
             var user = new User {
                 Id = request.Id,

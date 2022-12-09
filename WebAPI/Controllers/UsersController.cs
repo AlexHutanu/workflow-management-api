@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index([FromBody] User user)
         {
-            var command = new CreateUserCommand() {
+            var command = new CreateUser() {
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
@@ -36,7 +36,49 @@ namespace WebAPI.Controllers
         [HttpGet("username")]
         public async Task<IActionResult> Index(Guid userId)
         {
-            var result = await _mediator.Send(new GetUserQuery(userId));
+            var result = await _mediator.Send(new GetUser(userId));
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var result = await _mediator.Send(new GetAllUsers());
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(Guid userId)
+        {
+            var command = new DeleteUser { UserId = userId };
+            var result = await _mediator.Send(command);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] User user)
+        {
+            var command = new UpdateUser
+            {
+
+                UserId = userId,
+                Email = user.Email,
+                Name = user.Name,
+                Password = user.Password
+            };
+
+            var result = await _mediator.Send(command);
+
+            if (result == null)
+                return NotFound();
 
             return Ok(result);
         }

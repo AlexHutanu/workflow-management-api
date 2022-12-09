@@ -7,17 +7,17 @@ using Infrastructure.Interfaces.IConfiguration;
 namespace Application.Handlers.BoardHandlers
 {
 
-    public class CreateBoardCommandHandler : IRequestHandler<CreateBoardCommand, Board>
+    public class CreateBoardHandler : IRequestHandler<CreateBoard, Board>
     {
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateBoardCommandHandler(IUnitOfWork unitOfWork)
+        public CreateBoardHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Board> Handle(CreateBoardCommand request, CancellationToken cancellationToken)
+        public async Task<Board> Handle(CreateBoard request, CancellationToken cancellationToken)
         {
             var board = new Board
             {

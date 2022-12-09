@@ -8,17 +8,17 @@ namespace Application.Handlers.ActivityHandlers
 {
 
 
-    public class CreateActivityCommandHandler : IRequestHandler<CreateActivityCommand, Activity>
+    public class CreateActivityHandler : IRequestHandler<CreateActivity, Activity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateActivityCommandHandler(IUnitOfWork unitOfWork)
+        public CreateActivityHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Activity> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
+        public async Task<Activity> Handle(CreateActivity request, CancellationToken cancellationToken)
         {
 
             var activity = new Activity

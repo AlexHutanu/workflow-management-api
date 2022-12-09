@@ -4,7 +4,7 @@ using MediatR;
 namespace Application.Commands
 {
 
-    public class CreateBugTicketCommand : IRequest<BugTicket>
+    public class CreateBugTicket : IRequest<BugTicket>
     {
         public Guid Id { get; set; }
 

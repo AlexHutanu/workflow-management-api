@@ -24,7 +24,7 @@ public class BoardsController : Controller
     public async Task<IActionResult> Index([FromBody] Board board)
     {
 
-        var command = new CreateBoardCommand() {
+        var command = new CreateBoard() {
             Id = board.Id,
             Name = board.Name,
             Description = board.Description,
@@ -39,8 +39,50 @@ public class BoardsController : Controller
     public async  Task<ActionResult<Board>> Index(Guid boardId)
     {
 
-        var result = await _mediator.Send(new GetBoardQuery(boardId));
+        var result = await _mediator.Send(new GetBoard(boardId));
         
+        return Ok(result);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetBoards()
+    {
+        var result = await _mediator.Send(new GetAllBoards());
+
+        return Ok(result);
+    }
+
+    [HttpDelete("{boardId}")]
+    public async Task<IActionResult> DeleteUser(Guid boardId)
+    {
+        var command = new DeleteBoard { BoardId = boardId };
+        var result = await _mediator.Send(command);
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(result);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateBoard(Guid boardId, [FromBody] Board board)
+    {
+        var command = new UpdateBoard
+        {
+
+            BoardId = boardId,
+            Description = board.Description,
+            Name = board.Name,
+            NoOfTickets = board.NoOfTickets,
+        };
+
+        var result = await _mediator.Send(command);
+
+        if (result == null)
+            return NotFound();
+
         return Ok(result);
     }
 }

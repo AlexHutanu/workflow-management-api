@@ -6,16 +6,16 @@ using Infrastructure.Data;
 
 namespace Application.Handlers.BoardHandlers
 {
-    public class GetBoardQueryHandler : IRequestHandler<GetBoardQuery, Board>
+    public class GetBoardHandler : IRequestHandler<GetBoard, Board>
     {
         private readonly ApplicationDbContext _context;
 
-        public GetBoardQueryHandler(ApplicationDbContext context)
+        public GetBoardHandler(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Board> Handle(GetBoardQuery request, CancellationToken cancellationToken)
+        public async Task<Board> Handle(GetBoard request, CancellationToken cancellationToken)
         {
             return await _context.Boards.FirstAsync(board => board.Id == request.Id, cancellationToken: cancellationToken);
         }

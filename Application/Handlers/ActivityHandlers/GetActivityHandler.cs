@@ -7,17 +7,17 @@ using Infrastructure.Data;
 namespace Application.Handlers.ActivityHandlers
 {
 
-    public class GetActivityQueryHandler : IRequestHandler<GetActivityQuery, Activity>
+    public class GetActivityHandler : IRequestHandler<GetActivity, Activity>
     {
 
         private readonly ApplicationDbContext _context;
 
-        public GetActivityQueryHandler(ApplicationDbContext context)
+        public GetActivityHandler(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Activity> Handle(GetActivityQuery request, CancellationToken cancellationToken)
+        public async Task<Activity> Handle(GetActivity request, CancellationToken cancellationToken)
         {
             return await _context.Activities.FirstAsync(activity => activity.Id == request.Id,
                 cancellationToken: cancellationToken);
