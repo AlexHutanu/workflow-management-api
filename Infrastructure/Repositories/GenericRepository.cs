@@ -1,16 +1,18 @@
 ﻿using Infrastructure.Data;
+using Infrastructure.Entities;
 using Infrastructure.Interfaces.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         protected ApplicationDbContext _context;
 
@@ -38,14 +40,23 @@ namespace Infrastructure.Repositories
             return true;
         }
 
-        public virtual Task<bool> Delete(Guid id)
+        public virtual async Task<bool> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var exist = await dbSet.Where(item => item.Id == id).FirstOrDefaultAsync();
+
+            if (exist != null)
+            {
+                dbSet.Remove(exist);
+                return true;
+            }
+
+            return false;
         }
 
-        public virtual Task<bool> Update(T entity)
+        public virtual async Task<bool> Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(await dbSet.FirstOrDefaultAsync(item => item.Id == entity.Id)).CurrentValues.SetValues(entity);
+            return true;
         }
     }
 }

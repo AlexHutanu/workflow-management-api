@@ -15,12 +15,12 @@ namespace Infrastructure.Data
         private readonly ApplicationDbContext _context;
         private readonly ILogger _logger;
 
-        public IUserRepository? Users { get; private set;}
-        public IBugTicketRepository? BugTickets { get; private set; }
+        public UserRepository? Users { get; private set;}
+        public BugTicketRepository? BugTickets { get; private set; }
 
-        public IBoardRepository? Boards { get; private set; }
+        public BoardRepository? Boards { get; private set; }
 
-        public IActivityRepository? Activities { get; private set; }
+        public ActivityRepository? Activities { get; private set; }
 
         public UnitOfWork( ApplicationDbContext context, ILoggerFactory loggerFactory)
         {

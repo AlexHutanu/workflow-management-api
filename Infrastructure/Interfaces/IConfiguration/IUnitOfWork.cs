@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Interfaces.IRepositories;
+using Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Infrastructure.Interfaces.IConfiguration
 {
     public interface IUnitOfWork
     {
-        IUserRepository Users { get; }
-        IBugTicketRepository BugTickets { get; }
-        IActivityRepository Activities { get; }
-        IBoardRepository Boards { get; }
+        UserRepository Users { get; }
+        BugTicketRepository BugTickets { get; }
+        ActivityRepository Activities { get; }
+        BoardRepository Boards { get; }
 
 
         Task CompleteAsync();

@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entities;
 
-public class Board
+public class Board : BaseEntity
 {
-    [Key]
-    public Guid Id { get; set; }
 
     [Column("Name", TypeName = "varchar(200)")]
     public string? Name { get; set; }

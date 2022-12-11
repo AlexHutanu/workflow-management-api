@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Infrastructure.Entities;
 
 
-public abstract class Ticket
+public abstract class Ticket : BaseEntity
 {
-    [Key]
-    public Guid Id { get; set; }
 
     [Column("name", TypeName = "varchar(200)")]
     public string? Name { get; set; }

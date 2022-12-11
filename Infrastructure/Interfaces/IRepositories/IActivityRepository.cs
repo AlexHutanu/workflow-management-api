@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Interfaces.IRepositories
 {
-    public interface IActivityRepository : IGenericRepository<Activity>
-    {
-    }
+    public interface IActivityRepository  { }
+    
 }

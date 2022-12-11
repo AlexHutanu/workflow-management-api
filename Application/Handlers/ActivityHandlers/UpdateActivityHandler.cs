@@ -21,16 +21,16 @@ namespace Application.Handlers.ActivityHandlers
 
         public async Task<Activity> Handle(UpdateActivity request, CancellationToken cancellationToken)
         {
-            var toUpdate = new Activity();
+            var updatedActivity = new Activity();
 
-            toUpdate.Id = request.ActivityId;
-            toUpdate.Name = request.Name;
-            toUpdate.Description = request.Description;
+            updatedActivity.Id = request.ActivityId;
+            updatedActivity.Name = request.Name;
+            updatedActivity.Description = request.Description;
 
-            await _unitOfWork.Activities.Update(toUpdate);
+            await _unitOfWork.Activities.Update(updatedActivity);
             await _unitOfWork.CompleteAsync();
 
-            return toUpdate;
+            return updatedActivity;
         }
     }
 }
