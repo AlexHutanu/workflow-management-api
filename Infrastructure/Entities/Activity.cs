@@ -14,7 +14,4 @@ public class Activity : BaseEntity
 
     [Column("Owner", TypeName = "varchar(200)")]
     public string? Owner { get; set; }
-
-    [Column("TimeCreated", TypeName = "varchar(200)")]
-    public DateTime TimeCreated { get; set; }
 }

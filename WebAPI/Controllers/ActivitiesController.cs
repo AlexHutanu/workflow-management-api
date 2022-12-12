@@ -1,8 +1,10 @@
 ﻿using Application.Commands;
 using Application.Queries;
+using AutoMapper;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Dtos.ActivityDtos;
 using Activity = Infrastructure.Entities.Activity;
 
 namespace WebAPI.Controllers;
@@ -14,47 +16,63 @@ public class ActivitiesController : Controller
 {
 
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public ActivitiesController(IMediator mediator)
+    public ActivitiesController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index([FromBody] Activity activity)
+    public async Task<IActionResult> PostActivity([FromBody] ActivityPostPutDto activity)
     {
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var command = new CreateActivity() {
-            Id = activity.Id,
             Name = activity.Name,
             Description = activity.Description,
-            Owner = activity.Owner,
-            TimeCreated= activity.TimeCreated,
         };
+
         var result = await _mediator.Send(command);
-        return Ok(result);
+        var mappedResult = _mapper.Map<ActivityGetDto>(result);
+
+        return Ok(mappedResult);
     }
 
     [HttpGet]
     public async Task<IActionResult> GetActivities()
     {
         var result = await _mediator.Send(new GetAllActivities());
+        var mappedResult = _mapper.Map<List<ActivityGetDto>>(result);
 
-        return Ok(result);
+        return Ok(mappedResult);
     }
 
-    [HttpGet("{activityName}")]
-    public async Task<IActionResult> Index(Guid activityId)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
     {
 
-        var result = await _mediator.Send(new GetActivity(activityId));
+        var result = await _mediator.Send(new GetActivity(id));
 
-        return Ok(result);
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<ActivityGetDto>(result);
+
+        return Ok(mappedResult);
     }
 
-    [HttpDelete("{activityId}")]
-    public async Task<IActionResult> DeleteActivity(Guid activityId)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteActivity(Guid id)
     {
-        var command = new DeleteActivity { ActivityId = activityId };
+        var command = new DeleteActivity { ActivityId = id };
         var result = await _mediator.Send(command);
 
         if (result == null)
@@ -65,13 +83,11 @@ public class ActivitiesController : Controller
         return Ok(result);
     }
 
-    [HttpPut("{activityId}")]
-    public async Task<IActionResult> UpdateActivity(Guid activityId, [FromBody] Activity activity)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateActivity(Guid id, [FromBody] ActivityPostPutDto activity)
     {
         var command = new UpdateActivity
         {
-
-            ActivityId = activityId,
             Description = activity.Description,
             Name = activity.Name,
         };

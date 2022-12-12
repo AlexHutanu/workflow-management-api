@@ -1,9 +1,11 @@
 ﻿using Application.Commands;
 using Application.Queries;
+using AutoMapper;
 using Infrastructure.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Dtos.UserDtos;
 
 namespace WebAPI.Controllers
 {
@@ -12,33 +14,44 @@ namespace WebAPI.Controllers
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public UsersController(IMediator mediator)
+
+        public UsersController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;   
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([FromBody] User user)
+        public async Task<IActionResult> PostUser([FromBody] UserPostPutDto user)
         {
             var command = new CreateUser() {
-                Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
                 Password = user.Password
             };
-            var result = await _mediator.Send(command);
 
-            return Ok(result);
+            var result = await _mediator.Send(command);
+            var mappedResult = _mapper.Map<UserGetDto>(result);
+
+            return Ok(mappedResult);
         }
 
         [Authorize]
-        [HttpGet("username")]
-        public async Task<IActionResult> Index(Guid userId)
+        [HttpGet("id")]
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetUser(userId));
+            var result = await _mediator.Send(new GetUser(id));
 
-            return Ok(result);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            var mappedResult = _mapper.Map<UserGetDto>(result);
+
+            return Ok(mappedResult);
         }
 
         [HttpGet]
@@ -46,13 +59,15 @@ namespace WebAPI.Controllers
         {
             var result = await _mediator.Send(new GetAllUsers());
 
-            return Ok(result);
+            var mappedResult = _mapper.Map<UserGetDto>(result);
+
+            return Ok(mappedResult);
         }
 
-        [HttpDelete("{userId}")]
-        public async Task<IActionResult> DeleteUser(Guid userId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
-            var command = new DeleteUser { UserId = userId };
+            var command = new DeleteUser { UserId = id };
             var result = await _mediator.Send(command);
 
             if (result == null)
@@ -63,13 +78,13 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{userId}")]
-        public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] User user)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserPostPutDto user)
         {
             var command = new UpdateUser
             {
 
-                UserId = userId,
+                UserId = id,
                 Email = user.Email,
                 Name = user.Name,
                 Password = user.Password

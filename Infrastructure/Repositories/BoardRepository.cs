@@ -13,7 +13,7 @@ namespace Infrastructure.Repositories
 {
     public class BoardRepository : GenericRepository<Board>, IBoardRepository
     {
-        public BoardRepository(ApplicationDbContext context, ILogger logger) : base(context, logger)
+        public BoardRepository(ApplicationDbContext context ) : base(context)
         {
         }
 

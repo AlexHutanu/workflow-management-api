@@ -34,7 +34,8 @@ namespace Infrastructure.Migrations
                     Name = table.Column<string>(type: "varchar(200)", nullable: true),
                     OwnerName = table.Column<string>(type: "varchar(200)", nullable: true),
                     Description = table.Column<string>(type: "varchar(200)", nullable: true),
-                    NoOfTickets = table.Column<string>(type: "varchar(200)", nullable: false)
+                    NoOfTickets = table.Column<string>(type: "varchar(200)", nullable: false),
+                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,6 +50,7 @@ namespace Infrastructure.Migrations
                     stepstoreproduce = table.Column<string>(name: "steps_to_reproduce", type: "varchar(200)", nullable: true),
                     expectedresult = table.Column<string>(name: "expected_result", type: "varchar(200)", nullable: true),
                     actualresult = table.Column<string>(name: "actual_result", type: "varchar(200)", nullable: true),
+                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false),
                     name = table.Column<string>(type: "varchar(200)", nullable: true),
                     asignee = table.Column<string>(type: "varchar(200)", nullable: true),
                     reporter = table.Column<string>(type: "varchar(200)", nullable: true),
@@ -68,7 +70,8 @@ namespace Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "varchar(200)", nullable: true),
                     Email = table.Column<string>(type: "varchar(200)", nullable: true),
-                    Password = table.Column<string>(type: "varchar(200)", nullable: true)
+                    Password = table.Column<string>(type: "varchar(200)", nullable: true),
+                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {

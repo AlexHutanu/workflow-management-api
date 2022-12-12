@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Infrastructure.Entities;
 
 public class Board : BaseEntity
-{
+{ 
 
     [Column("Name", TypeName = "varchar(200)")]
     public string? Name { get; set; }

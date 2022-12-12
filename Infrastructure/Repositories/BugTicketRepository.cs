@@ -13,7 +13,7 @@ namespace Infrastructure.Repositories
 {
     public class BugTicketRepository : GenericRepository<BugTicket>, IBugTicketRepository
     {
-        public BugTicketRepository(ApplicationDbContext context, ILogger logger) : base(context, logger)
+        public BugTicketRepository(ApplicationDbContext context ) : base(context)
         {
         }
     }

@@ -1,61 +1,74 @@
 ﻿using Application.Commands;
 using Application.Queries;
+using AutoMapper;
 using Infrastructure.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using WebAPI.Dtos.BoardDtos;
 
 namespace WebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[DefaultStatusCode(200)]
+
+
 public class BoardsController : Controller
 {
 
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public BoardsController(IMediator mediator)
+    public BoardsController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index([FromBody] Board board)
+    public async Task<IActionResult> PostBoard([FromBody] BoardPostPutDto board)
     {
 
         var command = new CreateBoard() {
-            Id = board.Id,
             Name = board.Name,
             Description = board.Description,
-            NoOfTickets = board.NoOfTickets,
-            Owner = board.Owner,
+
         };
+
         var result = await _mediator.Send(command);
-        return Ok(result);
+        var mappedResult = _mapper.Map<BoardGetDto>(result);
+
+        return Ok(mappedResult);
     }
 
-    [HttpGet("{boardName}")]
-    public async  Task<ActionResult<Board>> Index(Guid boardId)
+    [HttpGet("{id}")]
+    public async  Task<ActionResult<Board>> GetById(Guid id)
     {
+        var result = await _mediator.Send(new GetBoard(id));
 
-        var result = await _mediator.Send(new GetBoard(boardId));
-        
-        return Ok(result);
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<BoardGetDto>(result);
+
+        return Ok(mappedResult);
     }
 
     [HttpGet]
     public async Task<IActionResult> GetBoards()
     {
         var result = await _mediator.Send(new GetAllBoards());
+        var mappedResult = _mapper.Map<List<BoardGetDto>>(result);
 
-        return Ok(result);
+        return Ok(mappedResult);
     }
 
-    [HttpDelete("{boardId}")]
-    public async Task<IActionResult> DeleteUser(Guid boardId)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(Guid id)
     {
-        var command = new DeleteBoard { BoardId = boardId };
+        var command = new DeleteBoard { BoardId = id };
         var result = await _mediator.Send(command);
 
         if (result == null)
@@ -67,15 +80,14 @@ public class BoardsController : Controller
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateBoard(Guid boardId, [FromBody] Board board)
+    public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] BoardPostPutDto board)
     {
         var command = new UpdateBoard
         {
 
-            BoardId = boardId,
+            BoardId = id,
             Description = board.Description,
             Name = board.Name,
-            NoOfTickets = board.NoOfTickets,
         };
 
         var result = await _mediator.Send(command);

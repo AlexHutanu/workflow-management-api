@@ -13,7 +13,7 @@ namespace Infrastructure.Repositories
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public UserRepository(ApplicationDbContext context, ILogger logger) : base(context, logger)
+        public UserRepository(ApplicationDbContext context) : base(context)
         {
         }
 

@@ -11,7 +11,9 @@ namespace Infrastructure.Entities
     public class BaseEntity
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+
+        [Column("TimeCreated", TypeName = "varchar(200)")]
+        public DateTime TimeCreated { get; set; }
     }
 }

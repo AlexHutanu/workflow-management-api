@@ -8,7 +8,7 @@ namespace Infrastructure.Repositories
 {
     public class ActivityRepository : GenericRepository<Activity>, IActivityRepository
     {
-            public ActivityRepository(ApplicationDbContext context, ILogger logger) : base(context, logger)
+            public ActivityRepository(ApplicationDbContext context) : base(context)
             {
             }
 

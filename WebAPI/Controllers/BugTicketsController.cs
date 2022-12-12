@@ -4,6 +4,8 @@ using Infrastructure.Entities;
 using Infrastructure.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Dtos.BugTicketDtos;
+using AutoMapper;
 
 namespace WebAPI.Controllers;
 
@@ -12,21 +14,21 @@ namespace WebAPI.Controllers;
 public class BugTicketsController : Controller
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
 
-    public BugTicketsController(IMediator mediator)
+    public BugTicketsController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index([FromBody] BugTicket bugTicket)
+    public async Task<IActionResult> PostBugTicket([FromBody] BugTicketPostPutDto bugTicket)
     {
         var command = new CreateBugTicket() {
-            Id = bugTicket.Id,
             Name = bugTicket.Name,
             Asignee = bugTicket.Asignee,
-            Reporter= bugTicket.Reporter,
             Description= bugTicket.Description,
             Deadline= bugTicket.Deadline,
             Status= bugTicket.Status,
@@ -36,15 +38,24 @@ public class BugTicketsController : Controller
         };
 
         var result = await _mediator.Send(command);
-        return Ok(result);
+        var mappedResult = _mapper.Map<BugTicketGetDto>(result);
+
+        return Ok(mappedResult);
     }
 
-    [HttpGet("{ticketName}")]
-    public async Task<IActionResult> Index(Guid ticketId)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
     {
-        var result = await _mediator.Send(new GetBugTicket(ticketId));
+        var result = await _mediator.Send(new GetBugTicket(id));
 
-        return Ok(result);
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<BugTicketGetDto>(result);
+
+        return Ok(mappedResult);
     }
 
     [HttpGet]
@@ -52,13 +63,15 @@ public class BugTicketsController : Controller
     {
         var result = await _mediator.Send(new GetAllBugTickets());
 
-        return Ok(result);
+        var mappedResult = _mapper.Map<BugTicketGetDto>(result);
+
+        return Ok(mappedResult);
     }
 
-    [HttpDelete("{bugTicketId}")]
-    public async Task<IActionResult> DeleteUser(Guid bugTicketId)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(Guid id)
     {
-        var command = new DeleteBugTicket { BugTicketId = bugTicketId };
+        var command = new DeleteBugTicket { BugTicketId = id };
         var result = await _mediator.Send(command);
 
         if (result == null)
@@ -69,13 +82,13 @@ public class BugTicketsController : Controller
         return Ok(result);
     }
 
-    [HttpPut("{bugTicketId}")]
-    public async Task<IActionResult> UpdateBugTicket(Guid bugTicketId, [FromBody] BugTicket bugTicket)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateBugTicket(Guid id, [FromBody] BugTicketPostPutDto bugTicket)
     {
         var command = new UpdateBugTicket
         {
 
-            BugTicketId = bugTicketId,
+            BugTicketId = id,
             Description = bugTicket.Description,
             Name = bugTicket.Name,
             Asignee= bugTicket.Asignee,

@@ -73,6 +73,11 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("OwnerName");
 
+                    b.Property<string>("TimeCreated")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("TimeCreated");
+
                     b.HasKey("Id");
 
                     b.ToTable("Boards");
@@ -121,6 +126,11 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("steps_to_reproduce");
 
+                    b.Property<string>("TimeCreated")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("TimeCreated");
+
                     b.HasKey("Id");
 
                     b.ToTable("BugTickets");
@@ -143,6 +153,11 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("varchar(200)")
                         .HasColumnName("Password");
+
+                    b.Property<string>("TimeCreated")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("TimeCreated");
 
                     b.HasKey("Id");
 
