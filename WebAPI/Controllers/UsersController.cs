@@ -1,7 +1,6 @@
 ﻿using Application.Commands;
 using Application.Queries;
 using AutoMapper;
-using Infrastructure.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

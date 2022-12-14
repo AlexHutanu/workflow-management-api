@@ -66,7 +66,7 @@ public class BoardsController : Controller
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteUser(Guid id)
+    public async Task<IActionResult> DeleteBoard(Guid id)
     {
         var command = new DeleteBoard { BoardId = id };
         var result = await _mediator.Send(command);

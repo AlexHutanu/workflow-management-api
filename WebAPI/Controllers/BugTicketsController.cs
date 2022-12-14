@@ -69,7 +69,7 @@ public class BugTicketsController : Controller
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteUser(Guid id)
+    public async Task<IActionResult> DeleteBugTicket(Guid id)
     {
         var command = new DeleteBugTicket { BugTicketId = id };
         var result = await _mediator.Send(command);
