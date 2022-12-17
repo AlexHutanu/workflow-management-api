@@ -26,7 +26,7 @@ builder.Services.AddMediatR(typeof(CreateActivityHandler));
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);
 
-builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
+//builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 
 var app = builder.Build();
@@ -42,7 +42,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+//app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.MapControllers();
 

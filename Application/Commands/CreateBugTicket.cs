@@ -25,5 +25,7 @@ namespace Application.Commands
         public string? ExpectedResult { get; set; }
 
         public string? ActualResult { get; set; }
+        
+        public Guid BoardForeignKey { get; set; }
     }
 }

@@ -19,5 +19,7 @@ namespace Application.Commands
         public string? StepsToReproduce { get; set; }
         public string? ExpectedResult { get;set; }
         public string? ActualResult { get; set; }
+
+        public Guid BoardId { get; set; }
     }
 }

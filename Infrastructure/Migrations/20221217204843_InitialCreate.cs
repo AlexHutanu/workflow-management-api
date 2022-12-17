@@ -43,27 +43,6 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BugTickets",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    stepstoreproduce = table.Column<string>(name: "steps_to_reproduce", type: "varchar(200)", nullable: true),
-                    expectedresult = table.Column<string>(name: "expected_result", type: "varchar(200)", nullable: true),
-                    actualresult = table.Column<string>(name: "actual_result", type: "varchar(200)", nullable: true),
-                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false),
-                    name = table.Column<string>(type: "varchar(200)", nullable: true),
-                    asignee = table.Column<string>(type: "varchar(200)", nullable: true),
-                    reporter = table.Column<string>(type: "varchar(200)", nullable: true),
-                    description = table.Column<string>(type: "varchar(200)", nullable: true),
-                    deadline = table.Column<string>(type: "varchar(200)", nullable: false),
-                    status = table.Column<string>(type: "varchar(200)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BugTickets", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -77,6 +56,39 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "BugTickets",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    stepstoreproduce = table.Column<string>(name: "steps_to_reproduce", type: "varchar(200)", nullable: true),
+                    expectedresult = table.Column<string>(name: "expected_result", type: "varchar(200)", nullable: true),
+                    actualresult = table.Column<string>(name: "actual_result", type: "varchar(200)", nullable: true),
+                    BoardForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false),
+                    name = table.Column<string>(type: "varchar(200)", nullable: true),
+                    asignee = table.Column<string>(type: "varchar(200)", nullable: true),
+                    reporter = table.Column<string>(type: "varchar(200)", nullable: true),
+                    description = table.Column<string>(type: "varchar(200)", nullable: true),
+                    deadline = table.Column<string>(type: "varchar(200)", nullable: false),
+                    status = table.Column<string>(type: "varchar(200)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BugTickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BugTickets_Boards_BoardForeignKey",
+                        column: x => x.BoardForeignKey,
+                        principalTable: "Boards",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BugTickets_BoardForeignKey",
+                table: "BugTickets",
+                column: "BoardForeignKey");
         }
 
         /// <inheritdoc />
@@ -86,13 +98,13 @@ namespace Infrastructure.Migrations
                 name: "Activities");
 
             migrationBuilder.DropTable(
-                name: "Boards");
-
-            migrationBuilder.DropTable(
                 name: "BugTickets");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Boards");
         }
     }
 }

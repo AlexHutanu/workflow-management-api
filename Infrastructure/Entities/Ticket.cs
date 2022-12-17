@@ -24,6 +24,7 @@ public abstract class Ticket : BaseEntity
 
     [Column("status", TypeName = "varchar(200)")]
     public string? Status { get; set; }
+
 }
 
 

@@ -17,4 +17,6 @@ public class Board : BaseEntity
 
     [Column("NoOfTickets", TypeName = "varchar(200)")]
     public int NoOfTickets { get; set; }
+
+    public ICollection<BugTicket>? BugTickets { get; set; }
 }

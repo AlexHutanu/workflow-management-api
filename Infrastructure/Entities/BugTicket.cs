@@ -12,5 +12,9 @@ public class BugTicket : Ticket
 
     [Column("actual_result", TypeName = "varchar(200)")]
     public string? ActualResult { get; set; }
-    
+
+    public Board Board { get; set; }
+
+    public Guid BoardForeignKey { get; set; }
+
 }

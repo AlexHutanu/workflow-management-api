@@ -1,4 +1,6 @@
-﻿namespace WebAPI.Dtos.BoardDtos
+﻿using Infrastructure.Entities;
+
+namespace WebAPI.Dtos.BoardDtos
 {
     public class BoardGetDto
     {
@@ -11,6 +13,8 @@
         public string? Description { get; set; }
 
         public int NoOfTickets { get; set; }
+
+        public ICollection<BugTicket> BugTickets { get; set; }
     }
 }
 

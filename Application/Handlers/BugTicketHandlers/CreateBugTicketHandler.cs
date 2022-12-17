@@ -32,6 +32,7 @@ namespace Application.Handlers.BugTicketHandlers
                 StepsToReproduce = request.StepsToReproduce,
                 ExpectedResult = request.ExpectedResult,
                 ActualResult = request.ActualResult,
+                BoardForeignKey = request.BoardForeignKey
             };
 
             await _unitOfWork.BugTickets.Add(bugTicket);

@@ -29,12 +29,13 @@ public class BugTicketsController : Controller
         var command = new CreateBugTicket() {
             Name = bugTicket.Name,
             Asignee = bugTicket.Asignee,
-            Description= bugTicket.Description,
-            Deadline= bugTicket.Deadline,
-            Status= bugTicket.Status,
-            StepsToReproduce= bugTicket.StepsToReproduce,
-            ExpectedResult= bugTicket.ExpectedResult,
-            ActualResult= bugTicket.ActualResult,
+            Description = bugTicket.Description,
+            Deadline = bugTicket.Deadline,
+            Status = bugTicket.Status,
+            StepsToReproduce = bugTicket.StepsToReproduce,
+            ExpectedResult = bugTicket.ExpectedResult,
+            ActualResult = bugTicket.ActualResult,
+            BoardForeignKey = bugTicket.BoardId
         };
 
         var result = await _mediator.Send(command);
@@ -63,7 +64,7 @@ public class BugTicketsController : Controller
     {
         var result = await _mediator.Send(new GetAllBugTickets());
 
-        var mappedResult = _mapper.Map<BugTicketGetDto>(result);
+        var mappedResult = _mapper.Map<List<BugTicketGetDto>>(result);
 
         return Ok(mappedResult);
     }
@@ -97,6 +98,7 @@ public class BugTicketsController : Controller
             StepsToReproduce= bugTicket.StepsToReproduce,
             ExpectedResult= bugTicket.ExpectedResult,
             ActualResult= bugTicket.ActualResult,
+            BoardId = bugTicket.BoardId
         };
 
         var result = await _mediator.Send(command);

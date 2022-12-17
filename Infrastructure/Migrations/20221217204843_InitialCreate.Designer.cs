@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221212121931_InitialCreate")]
+    [Migration("20221217204843_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -100,6 +100,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("asignee");
 
+                    b.Property<Guid>("BoardForeignKey")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Deadline")
                         .IsRequired()
                         .HasColumnType("varchar(200)")
@@ -136,6 +139,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BoardForeignKey");
+
                     b.ToTable("BugTickets");
                 });
 
@@ -165,6 +170,22 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.BugTicket", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.Board", "Board")
+                        .WithMany("BugTickets")
+                        .HasForeignKey("BoardForeignKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Board");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Board", b =>
+                {
+                    b.Navigation("BugTickets");
                 });
 #pragma warning restore 612, 618
         }

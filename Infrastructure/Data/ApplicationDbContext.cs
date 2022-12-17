@@ -15,6 +15,18 @@ public class ApplicationDbContext : DbContext
         optionsBuilder.UseSqlServer(
             "Server=localhost;Database=master;Trusted_Connection=True;TrustServerCertificate=True;");
         base.OnConfiguring(optionsBuilder);
+
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<BugTicket>()
+            .Property("BoardForeignKey");
+
+        modelBuilder.Entity<BugTicket>()
+            .HasOne(p => p.Board)
+            .WithMany(p => p.BugTickets)
+            .HasForeignKey("BoardForeignKey");
     }
 
     public DbSet<Board> Boards { get; set; }

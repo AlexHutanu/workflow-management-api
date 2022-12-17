@@ -21,5 +21,6 @@
         public string? ExpectedResult { get; set; }
 
         public string? ActualResult { get; set; }
+
     }
 }

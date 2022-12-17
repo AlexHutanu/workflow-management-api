@@ -17,6 +17,8 @@
         public string? ExpectedResult { get; set; }
 
         public string? ActualResult { get; set; }
+
+        public Guid BoardId { get; set; }
     }
 }
 

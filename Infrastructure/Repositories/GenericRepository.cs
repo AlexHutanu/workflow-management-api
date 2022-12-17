@@ -19,6 +19,7 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<T>> GetAll()
         {
+
             return await dbSet.ToListAsync();
         }
 
