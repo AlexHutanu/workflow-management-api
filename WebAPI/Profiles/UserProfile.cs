@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Infrastructure.Entities;
 using System.Security.Cryptography.Xml;
-using WebAPI.Dtos.UserDtos;
+using WebAPI.Models.User;
 
 namespace WebAPI.Profiles
 {
@@ -9,8 +9,8 @@ namespace WebAPI.Profiles
     {
         public UserProfile() {
 
-            CreateMap<User, UserGetDto>();
-            CreateMap<UserPostPutDto, User>();
+            CreateMap<User, ReadUserModel>();
+            CreateMap<WriteUserModel, User>();
         }
     }
 }

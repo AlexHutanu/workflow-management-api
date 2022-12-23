@@ -1,5 +1,4 @@
 ﻿using Application.Queries;
-using Infrastructure.Interfaces.IConfiguration;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Entities;
+using Infrastructure.Interfaces;
 
 namespace Application.Handlers.BoardHandlers
 {

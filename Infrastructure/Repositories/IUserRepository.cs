@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Interfaces.IRepositories
+namespace Infrastructure.Repositories.IRepositories
 {
     public interface IUserRepository : IGenericRepository<User>
     {

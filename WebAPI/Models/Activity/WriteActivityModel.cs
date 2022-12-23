@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebAPI.Dtos.ActivityDtos
+namespace WebAPI.Models.ActivityDtos
 {
-    public class ActivityPostPutDto
+    public class WriteActivityModel
     {
         [Required]
         public string? Name { get; set; }

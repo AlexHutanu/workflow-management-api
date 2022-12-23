@@ -1,6 +1,6 @@
 ﻿using Application.Commands;
 using Infrastructure.Entities;
-using Infrastructure.Interfaces.IConfiguration;
+using Infrastructure.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;

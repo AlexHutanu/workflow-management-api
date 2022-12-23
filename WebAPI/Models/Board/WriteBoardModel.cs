@@ -1,9 +1,9 @@
-﻿namespace WebAPI.Dtos.ActivityDtos
+﻿namespace WebAPI.Models.Board
 {
-    public class ActivityGetDto
+    public class WriteBoardModel
     {
-        public Guid Id { get; set; }
         public string? Name { get; set; }
+
         public string? Description { get; set; }
     }
 }

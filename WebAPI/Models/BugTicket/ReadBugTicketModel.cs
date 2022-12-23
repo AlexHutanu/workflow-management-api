@@ -1,6 +1,6 @@
-﻿namespace WebAPI.Dtos.BugTicketDtos
+﻿namespace WebAPI.Models.BugTicket
 {
-    public class BugTicketGetDto
+    public class ReadBugTicketModel
     {
         public Guid Id { get; set; }
 

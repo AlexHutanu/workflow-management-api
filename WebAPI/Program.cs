@@ -1,7 +1,7 @@
 using Application.Handlers;
 using Application.Handlers.ActivityHandlers;
 using Infrastructure.Data;
-using Infrastructure.Interfaces.IConfiguration;
+using Infrastructure.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using WebAPI.Middlewares;

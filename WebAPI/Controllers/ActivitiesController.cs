@@ -1,11 +1,9 @@
 ﻿using Application.Commands;
 using Application.Queries;
 using AutoMapper;
-using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Dtos.ActivityDtos;
-using Activity = Infrastructure.Entities.Activity;
+using WebAPI.Models.ActivityDtos;
 
 namespace WebAPI.Controllers;
 
@@ -25,7 +23,7 @@ public class ActivitiesController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostActivity([FromBody] ActivityPostPutDto activity)
+    public async Task<IActionResult> Post([FromBody] WriteActivityModel activity)
     {
 
         if (!ModelState.IsValid)
@@ -39,16 +37,16 @@ public class ActivitiesController : Controller
         };
 
         var result = await _mediator.Send(command);
-        var mappedResult = _mapper.Map<ActivityGetDto>(result);
+        var mappedResult = _mapper.Map<ReadActivityModel>(result);
 
         return Ok(mappedResult);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetActivities()
+    public async Task<IActionResult> Get()
     {
         var result = await _mediator.Send(new GetAllActivities());
-        var mappedResult = _mapper.Map<List<ActivityGetDto>>(result);
+        var mappedResult = _mapper.Map<List<ReadActivityModel>>(result);
 
         return Ok(mappedResult);
     }
@@ -64,13 +62,13 @@ public class ActivitiesController : Controller
             return NotFound();
         }
 
-        var mappedResult = _mapper.Map<ActivityGetDto>(result);
+        var mappedResult = _mapper.Map<ReadActivityModel>(result);
 
         return Ok(mappedResult);
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteActivity(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         var command = new DeleteActivity { ActivityId = id };
         var result = await _mediator.Send(command);
@@ -84,7 +82,7 @@ public class ActivitiesController : Controller
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateActivity(Guid id, [FromBody] ActivityPostPutDto activity)
+    public async Task<IActionResult> Update(Guid id, [FromBody] WriteActivityModel activity)
     {
         var command = new UpdateActivity
         {

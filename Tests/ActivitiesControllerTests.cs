@@ -4,7 +4,7 @@ using AutoMapper;
 using MediatR;
 using Moq;
 using WebAPI.Controllers;
-using WebAPI.Dtos.ActivityDtos;
+using WebAPI.Models.ActivityDtos;
 
 
 namespace Tests
@@ -23,7 +23,7 @@ namespace Tests
                 .Verifiable();
 
             var controller = new ActivitiesController(_mockMediator.Object, _mockMapper.Object);
-            await controller.GetActivities();
+            await controller.Get();
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetAllActivities>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -46,7 +46,7 @@ namespace Tests
         public async Task CreateActivityIsCalled()
         {
 
-            var newActivity = new ActivityPostPutDto()
+            var newActivity = new WriteActivityModel()
             {
                 Name = "TestActivity",
                 Description = "Test",
@@ -58,7 +58,7 @@ namespace Tests
 
             var controller = new ActivitiesController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.PostActivity(newActivity);
+            await controller.Post(newActivity);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<CreateActivity>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -66,7 +66,7 @@ namespace Tests
         [TestMethod]
         public async Task UpdateActivityIsCalled()
         {
-            var newActivity = new ActivityPostPutDto()
+            var newActivity = new WriteActivityModel()
             {
                 Name = "TestActivity",
                 Description = "Test",
@@ -78,7 +78,7 @@ namespace Tests
 
             var controller = new ActivitiesController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.UpdateActivity(Guid.NewGuid(), newActivity);
+            await controller.Update(Guid.NewGuid(), newActivity);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<UpdateActivity>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -92,7 +92,7 @@ namespace Tests
 
             var controller = new ActivitiesController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.DeleteActivity(Guid.NewGuid());
+            await controller.Delete(Guid.NewGuid());
         }
     }
 }

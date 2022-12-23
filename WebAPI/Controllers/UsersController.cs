@@ -4,7 +4,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Dtos.UserDtos;
+using WebAPI.Models.User;
 
 namespace WebAPI.Controllers
 {
@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] UserPostPutDto user)
+        public async Task<IActionResult> Post([FromBody] WriteUserModel user)
         {
             var command = new CreateUser() {
                 Name = user.Name,
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             };
 
             var result = await _mediator.Send(command);
-            var mappedResult = _mapper.Map<UserGetDto>(result);
+            var mappedResult = _mapper.Map<ReadUserModel>(result);
 
             return Ok(mappedResult);
         }
@@ -48,23 +48,23 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            var mappedResult = _mapper.Map<UserGetDto>(result);
+            var mappedResult = _mapper.Map<ReadUserModel>(result);
 
             return Ok(mappedResult);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> Get()
         {
             var result = await _mediator.Send(new GetAllUsers());
 
-            var mappedResult = _mapper.Map<UserGetDto>(result);
+            var mappedResult = _mapper.Map<ReadUserModel>(result);
 
             return Ok(mappedResult);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteUser { UserId = id };
             var result = await _mediator.Send(command);
@@ -78,7 +78,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserPostPutDto user)
+        public async Task<IActionResult> Update(Guid id, [FromBody] WriteUserModel user)
         {
             var command = new UpdateUser
             {

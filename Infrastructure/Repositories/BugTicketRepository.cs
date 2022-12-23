@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Data;
 using Infrastructure.Entities;
-using Infrastructure.Interfaces.IRepositories;
+using Infrastructure.Repositories.IRepositories;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System;

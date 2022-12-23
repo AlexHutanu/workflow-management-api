@@ -1,6 +1,6 @@
-﻿namespace WebAPI.Dtos.UserDtos
+﻿namespace WebAPI.Models.User
 {
-    public class UserPostPutDto
+    public class WriteUserModel
     {
         public string Name { get; set; }
 

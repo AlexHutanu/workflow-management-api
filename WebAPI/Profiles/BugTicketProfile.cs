@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Infrastructure.Entities;
-using WebAPI.Dtos.BugTicketDtos;
+using WebAPI.Models.BugTicket;
 
 namespace WebAPI.Profiles
 {
     public class BugTicketProfile : Profile
     {
         public BugTicketProfile() {
-            CreateMap<BugTicket, BugTicketGetDto>();
-            CreateMap<BugTicketPostPutDto, BugTicket>();
+            CreateMap<BugTicket, ReadBugTicketModel>();
+            CreateMap<WriteBugTicketModel, BugTicket>();
         }   
     }
 }

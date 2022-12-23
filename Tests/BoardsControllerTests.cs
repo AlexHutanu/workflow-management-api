@@ -4,7 +4,7 @@ using AutoMapper;
 using MediatR;
 using Moq;
 using WebAPI.Controllers;
-using WebAPI.Dtos.BoardDtos;
+using WebAPI.Models.Board;
 
 namespace Tests
 {
@@ -22,7 +22,7 @@ namespace Tests
                 .Verifiable();
 
             var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
-            await controller.GetBoards();
+            await controller.Get();
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetAllBoards>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -45,7 +45,7 @@ namespace Tests
         public async Task CreateBoardIsCalled()
         {
 
-            var newBoard = new BoardPostPutDto()
+            var newBoard = new WriteBoardModel()
             {
                 Name = "TestBoard",
                 Description = "Test",
@@ -57,7 +57,7 @@ namespace Tests
 
             var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.PostBoard(newBoard);
+            await controller.Post(newBoard);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<CreateBoard>(), It.IsAny<CancellationToken>()), Times.Once());          
         }
@@ -65,7 +65,7 @@ namespace Tests
         [TestMethod]
         public async Task UpdateBoardIsCalled()
         {
-            var board = new BoardPostPutDto()
+            var board = new WriteBoardModel()
             {
                 Name = "TestBoard",
                 Description = "Test",
@@ -77,7 +77,7 @@ namespace Tests
 
             var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.UpdateBoard(Guid.NewGuid(), board);
+            await controller.Update(Guid.NewGuid(), board);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<UpdateBoard>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -91,7 +91,7 @@ namespace Tests
 
             var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.DeleteBoard(Guid.NewGuid());
+            await controller.Delete(Guid.NewGuid());
         }
     }
 }

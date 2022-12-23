@@ -1,8 +1,6 @@
-﻿using Infrastructure.Interfaces.IConfiguration;
-using Infrastructure.Interfaces.IRepositories;
+﻿using Infrastructure.Repositories.IRepositories;
 using Infrastructure.Repositories;
-using Microsoft.Extensions.Logging;
-
+using Infrastructure.Interfaces;
 
 namespace Infrastructure.Data
 {

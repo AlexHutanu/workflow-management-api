@@ -1,6 +1,6 @@
-﻿namespace WebAPI.Dtos.UserDtos
+﻿namespace WebAPI.Models.User
 {
-    public class UserGetDto
+    public class ReadUserModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

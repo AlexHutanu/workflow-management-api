@@ -9,8 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebAPI.Controllers;
-using WebAPI.Dtos.BoardDtos;
-using WebAPI.Dtos.UserDtos;
+using WebAPI.Models.Board;
+using WebAPI.Models.User;
 
 namespace Tests
 {
@@ -28,7 +28,7 @@ namespace Tests
                 .Verifiable();
 
             var controller = new UsersController(_mockMediator.Object, _mockMapper.Object);
-            await controller.GetUsers();
+            await controller.Get();
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetAllUsers>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -51,7 +51,7 @@ namespace Tests
         public async Task CreateUserIsCalled()
         {
 
-            var newUser = new UserPostPutDto()
+            var newUser = new WriteUserModel()
             {
                 Name = "TestUser",
                 Email = "Test",
@@ -64,7 +64,7 @@ namespace Tests
 
             var controller = new UsersController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.PostUser(newUser);
+            await controller.Post(newUser);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<CreateUser>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -72,7 +72,7 @@ namespace Tests
         [TestMethod]
         public async Task UpdateUserIsCalled()
         {
-            var newUser = new UserPostPutDto()
+            var newUser = new WriteUserModel()
             {
                 Name = "TestBoard",
                 Email = "Test",
@@ -85,7 +85,7 @@ namespace Tests
 
             var controller = new UsersController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.UpdateUser(Guid.NewGuid(), newUser);
+            await controller.Update(Guid.NewGuid(), newUser);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<UpdateUser>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -99,7 +99,7 @@ namespace Tests
 
             var controller = new UsersController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.DeleteUser(Guid.NewGuid());
+            await controller.Delete(Guid.NewGuid());
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Queries;
 using Infrastructure.Entities;
-using Infrastructure.Interfaces.IConfiguration;
+using Infrastructure.Interfaces;
 using MediatR;
 
 namespace Application.Handlers.ActivityHandlers

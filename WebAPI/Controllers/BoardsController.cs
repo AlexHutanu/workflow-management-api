@@ -5,7 +5,7 @@ using Infrastructure.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using WebAPI.Dtos.BoardDtos;
+using WebAPI.Models.Board;
 
 namespace WebAPI.Controllers;
 
@@ -26,7 +26,7 @@ public class BoardsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostBoard([FromBody] BoardPostPutDto board)
+    public async Task<IActionResult> Post([FromBody] WriteBoardModel board)
     {
 
         var command = new CreateBoard() {
@@ -36,7 +36,7 @@ public class BoardsController : Controller
         };
 
         var result = await _mediator.Send(command);
-        var mappedResult = _mapper.Map<BoardGetDto>(result);
+        var mappedResult = _mapper.Map<ReadBoardModel>(result);
 
         return Ok(mappedResult);
     }
@@ -51,22 +51,22 @@ public class BoardsController : Controller
             return NotFound();
         }
 
-        var mappedResult = _mapper.Map<BoardGetDto>(result);
+        var mappedResult = _mapper.Map<ReadBoardModel>(result);
 
         return Ok(mappedResult);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetBoards()
+    public async Task<IActionResult> Get()
     {
         var result = await _mediator.Send(new GetAllBoards());
-        var mappedResult = _mapper.Map<List<BoardGetDto>>(result);
+        var mappedResult = _mapper.Map<List<ReadBoardModel>>(result);
 
         return Ok(mappedResult);
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteBoard(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         var command = new DeleteBoard { BoardId = id };
         var result = await _mediator.Send(command);
@@ -80,7 +80,7 @@ public class BoardsController : Controller
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] BoardPostPutDto board)
+    public async Task<IActionResult> Update(Guid id, [FromBody] WriteBoardModel board)
     {
         var command = new UpdateBoard
         {

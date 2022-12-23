@@ -4,7 +4,7 @@ using Infrastructure.Entities;
 using Infrastructure.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Dtos.BugTicketDtos;
+using WebAPI.Models.BugTicket;
 using AutoMapper;
 
 namespace WebAPI.Controllers;
@@ -24,7 +24,7 @@ public class BugTicketsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostBugTicket([FromBody] BugTicketPostPutDto bugTicket)
+    public async Task<IActionResult> Post([FromBody] WriteBugTicketModel bugTicket)
     {
         var command = new CreateBugTicket() {
             Name = bugTicket.Name,
@@ -39,7 +39,7 @@ public class BugTicketsController : Controller
         };
 
         var result = await _mediator.Send(command);
-        var mappedResult = _mapper.Map<BugTicketGetDto>(result);
+        var mappedResult = _mapper.Map<ReadBugTicketModel>(result);
 
         return Ok(mappedResult);
     }
@@ -54,23 +54,23 @@ public class BugTicketsController : Controller
             return NotFound();
         }
 
-        var mappedResult = _mapper.Map<BugTicketGetDto>(result);
+        var mappedResult = _mapper.Map<ReadBugTicketModel>(result);
 
         return Ok(mappedResult);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetBugTickets()
+    public async Task<IActionResult> Get()
     {
         var result = await _mediator.Send(new GetAllBugTickets());
 
-        var mappedResult = _mapper.Map<List<BugTicketGetDto>>(result);
+        var mappedResult = _mapper.Map<List<ReadBugTicketModel>>(result);
 
         return Ok(mappedResult);
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteBugTicket(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         var command = new DeleteBugTicket { BugTicketId = id };
         var result = await _mediator.Send(command);
@@ -84,7 +84,7 @@ public class BugTicketsController : Controller
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateBugTicket(Guid id, [FromBody] BugTicketPostPutDto bugTicket)
+    public async Task<IActionResult> Update(Guid id, [FromBody] WriteBugTicketModel bugTicket)
     {
         var command = new UpdateBugTicket
         {

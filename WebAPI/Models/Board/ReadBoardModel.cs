@@ -1,8 +1,8 @@
 ﻿using Infrastructure.Entities;
 
-namespace WebAPI.Dtos.BoardDtos
+namespace WebAPI.Models.Board
 {
-    public class BoardGetDto
+    public class ReadBoardModel
     {
         public Guid Id { get; set; }
 
@@ -14,7 +14,7 @@ namespace WebAPI.Dtos.BoardDtos
 
         public int NoOfTickets { get; set; }
 
-        public ICollection<BugTicket> BugTickets { get; set; }
+        public ICollection<Infrastructure.Entities.BugTicket> BugTickets { get; set; }
     }
 }
 

@@ -9,8 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebAPI.Controllers;
-using WebAPI.Dtos.BoardDtos;
-using WebAPI.Dtos.BugTicketDtos;
+using WebAPI.Models.Board;
+using WebAPI.Models.BugTicket;
 
 namespace Tests
 {
@@ -29,7 +29,7 @@ namespace Tests
                 .Verifiable();
 
             var controller = new BugTicketsController(_mockMediator.Object, _mockMapper.Object);
-            await controller.GetBugTickets();
+            await controller.Get();
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetAllBugTickets>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -52,7 +52,7 @@ namespace Tests
         public async Task CreateBugTicketIsCalled()
         {
 
-            var newBugTicket = new BugTicketPostPutDto()
+            var newBugTicket = new WriteBugTicketModel()
             {
                 Name = "TestBugTicket",
                 Description = "Test",
@@ -70,7 +70,7 @@ namespace Tests
 
             var controller = new BugTicketsController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.PostBugTicket(newBugTicket);
+            await controller.Post(newBugTicket);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<CreateBugTicket>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -78,7 +78,7 @@ namespace Tests
         [TestMethod]
         public async Task UpdateBugTicketIsCalled()
         {
-            var newBugTicket = new BugTicketPostPutDto()
+            var newBugTicket = new WriteBugTicketModel()
             {
                 Name = "TestBugTicket",
                 Description = "Test",
@@ -96,7 +96,7 @@ namespace Tests
 
             var controller = new BugTicketsController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.UpdateBugTicket(Guid.NewGuid(), newBugTicket);
+            await controller.Update(Guid.NewGuid(), newBugTicket);
 
             _mockMediator.Verify(x => x.Send(It.IsAny<UpdateBugTicket>(), It.IsAny<CancellationToken>()), Times.Once());
         }
@@ -110,7 +110,7 @@ namespace Tests
 
             var controller = new BugTicketsController(_mockMediator.Object, _mockMapper.Object);
 
-            await controller.DeleteBugTicket(Guid.NewGuid());
+            await controller.Delete(Guid.NewGuid());
         }
     }
 }

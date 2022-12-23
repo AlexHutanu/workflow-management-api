@@ -1,6 +1,6 @@
-﻿namespace WebAPI.Dtos.BugTicketDtos
+﻿namespace WebAPI.Models.BugTicket
 {
-    public class BugTicketPostPutDto
+    public class WriteBugTicketModel
     {
         public string? Name { get; set; }
 

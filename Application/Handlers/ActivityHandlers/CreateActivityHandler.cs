@@ -2,7 +2,7 @@ using Application.Commands;
 using Infrastructure.Entities;
 using MediatR;
 using Infrastructure.Data;
-using Infrastructure.Interfaces.IConfiguration;
+using Infrastructure.Interfaces;
 
 namespace Application.Handlers.ActivityHandlers
 {

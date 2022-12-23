@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Infrastructure.Entities;
-using WebAPI.Dtos.ActivityDtos;
+using WebAPI.Models.ActivityDtos;
 
 namespace WebAPI.Profiles
 {
@@ -8,8 +8,8 @@ namespace WebAPI.Profiles
     {
         public ActivityProfile()
         {
-            CreateMap<Activity, ActivityGetDto>();
-            CreateMap<ActivityPostPutDto, Activity>();
+            CreateMap<Activity, ReadActivityModel>();
+            CreateMap<WriteActivityModel, Activity>();
         }
     }
 }
