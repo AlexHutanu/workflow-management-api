@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.ActivityHandlers
+namespace Application.Handlers.Activity
 {
-    public class DeleteActivityHandler : IRequestHandler<DeleteActivity, Activity>
+    public class DeleteActivityHandler : IRequestHandler<DeleteActivity, Infrastructure.Entities.ActivityEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace Application.Handlers.ActivityHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Activity> Handle(DeleteActivity request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.ActivityEntity> Handle(DeleteActivity request, CancellationToken cancellationToken)
         {
             var activity = await _unitOfWork.Activities.GetById(request.ActivityId);
 

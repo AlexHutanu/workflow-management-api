@@ -4,10 +4,10 @@ using MediatR;
 using Infrastructure.Data;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.UserHandlers
+namespace Application.Handlers.User
 {
 
-    public class CreateUserHandler : IRequestHandler<CreateUser, User>
+    public class CreateUserHandler : IRequestHandler<CreateUser, Infrastructure.Entities.UserEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -17,9 +17,9 @@ namespace Application.Handlers.UserHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<User> Handle(CreateUser request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.UserEntity> Handle(CreateUser request, CancellationToken cancellationToken)
         {
-            var user = new User {
+            var user = new Infrastructure.Entities.UserEntity {
                 Id = request.Id,
                 Name = request.Name,
                 Email = request.Email,

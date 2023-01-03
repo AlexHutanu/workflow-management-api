@@ -1,7 +1,5 @@
 ﻿using Application.Commands;
 using Application.Queries;
-using Infrastructure.Entities;
-using Infrastructure.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.BugTicket;
@@ -59,6 +57,21 @@ public class BugTicketsController : Controller
         return Ok(mappedResult);
     }
 
+    [HttpGet("boardId")]
+    public async Task<IActionResult> GetByBoardId(Guid boardId)
+    {
+        var result = await _mediator.Send(new GetBugTicketByBoardId(boardId));
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<ReadBugTicketModel>(result);
+
+        return Ok(mappedResult);
+    }
+    
     [HttpGet]
     public async Task<IActionResult> Get()
     {

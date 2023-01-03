@@ -3,15 +3,16 @@ using Application.Queries;
 using AutoMapper;
 using Infrastructure.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using WebAPI.Models.Board;
 
-namespace WebAPI.Controllers;
+namespace WebAPI.Controllers;   
 
 [ApiController]
 [Route("[controller]")]
-
 
 public class BoardsController : Controller
 {
@@ -28,7 +29,6 @@ public class BoardsController : Controller
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] WriteBoardModel board)
     {
-
         var command = new CreateBoard() {
             Name = board.Name,
             Description = board.Description,
@@ -42,7 +42,7 @@ public class BoardsController : Controller
     }
 
     [HttpGet("{id}")]
-    public async  Task<ActionResult<Board>> GetById(Guid id)
+    public async  Task<ActionResult<BoardEntity>> GetById(Guid id)
     {
         var result = await _mediator.Send(new GetBoard(id));
 

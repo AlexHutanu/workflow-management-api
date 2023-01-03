@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.BoardHandlers
+namespace Application.Handlers.Board
 {
-    public class DeleteBoardHandler : IRequestHandler<DeleteBoard, Board>
+    public class DeleteBoardHandler : IRequestHandler<DeleteBoard, Infrastructure.Entities.BoardEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -20,7 +20,7 @@ namespace Application.Handlers.BoardHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Board> Handle(DeleteBoard request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.BoardEntity> Handle(DeleteBoard request, CancellationToken cancellationToken)
         {
             var board = await _unitOfWork.Boards.GetById(request.BoardId);
 

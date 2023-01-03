@@ -4,7 +4,7 @@ using MediatR;
 namespace Application.Queries
 {
 
-    public class GetBoard : IRequest<Board>
+    public class GetBoard : IRequest<BoardEntity>
     {
         public Guid Id { get; }
 

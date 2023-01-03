@@ -7,8 +7,8 @@ namespace WebAPI.Profiles
     public class BoardProfile : Profile
     {
         public BoardProfile() {
-            CreateMap<Board, ReadBoardModel>();
-            CreateMap<WriteBoardModel, Board>();
+            CreateMap<BoardEntity, ReadBoardModel>();
+            CreateMap<WriteBoardModel, BoardEntity>();
         }
     }
 }

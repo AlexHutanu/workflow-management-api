@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.BoardHandlers
+namespace Application.Handlers.Board
 {
-    public class UpdateBoardHandler : IRequestHandler<UpdateBoard, Board>
+    public class UpdateBoardHandler : IRequestHandler<UpdateBoard, Infrastructure.Entities.BoardEntity>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,9 +19,9 @@ namespace Application.Handlers.BoardHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Board> Handle(UpdateBoard request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.BoardEntity> Handle(UpdateBoard request, CancellationToken cancellationToken)
         {
-            var toUpdate = new Board();
+            var toUpdate = new Infrastructure.Entities.BoardEntity();
 
             toUpdate.Description = request.Description;
             toUpdate.Name = request.Name;

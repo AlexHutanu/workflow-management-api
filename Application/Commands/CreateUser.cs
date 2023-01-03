@@ -3,7 +3,7 @@ using MediatR;
 namespace Application.Commands
 {
 
-    public class CreateUser : IRequest<User>
+    public class CreateUser : IRequest<UserEntity>
     {
         public Guid Id { get; set; }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands
 {
-    public class DeleteActivity : IRequest<Activity>
+    public class DeleteActivity : IRequest<ActivityEntity>
     {
         public Guid ActivityId { get; set; } 
     }

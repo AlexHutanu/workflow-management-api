@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Repositories
 {
-    public class ActivityRepository : GenericRepository<Activity>, IActivityRepository
+    public class ActivityRepository : GenericRepository<ActivityEntity>, IActivityRepository
     {
             public ActivityRepository(ApplicationDbContext context) : base(context)
             {

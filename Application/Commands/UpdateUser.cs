@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Commands
 {
-    public class UpdateUser : IRequest<User>
+    public class UpdateUser : IRequest<UserEntity>
     {
         public Guid UserId { get; set; }
         public string? Name { get; set; }

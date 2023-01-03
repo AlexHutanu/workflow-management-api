@@ -15,6 +15,8 @@ namespace Tests
         private readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
         private readonly Mock<IMapper> _mockMapper = new Mock<IMapper>();
 
+  
+
         [TestMethod]
         public async Task GetAllActivitiesIsCalled()
         {
@@ -53,14 +55,14 @@ namespace Tests
             };
 
             _mockMediator
-                .Setup(m => m.Send(It.IsAny<CreateActivity>(), It.IsAny<CancellationToken>()))
+                .Setup(m => m.Send(It.IsAny<Activity>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
             var controller = new ActivitiesController(_mockMediator.Object, _mockMapper.Object);
 
             await controller.Post(newActivity);
 
-            _mockMediator.Verify(x => x.Send(It.IsAny<CreateActivity>(), It.IsAny<CancellationToken>()), Times.Once());
+            _mockMediator.Verify(x => x.Send(It.IsAny<Activity>(), It.IsAny<CancellationToken>()), Times.Once());
         }
 
         [TestMethod]

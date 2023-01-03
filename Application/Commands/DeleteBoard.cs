@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands
 {
-    public class DeleteBoard : IRequest<Board>
+    public class DeleteBoard : IRequest<BoardEntity>
     {
         public Guid BoardId { get; set; }
     }

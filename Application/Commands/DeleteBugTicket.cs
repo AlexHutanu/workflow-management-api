@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands
 {
-    public class DeleteBugTicket : IRequest<BugTicket>
+    public class DeleteBugTicket : IRequest<BugTicketEntity>
     {
         public Guid BugTicketId { get; set; }
     }

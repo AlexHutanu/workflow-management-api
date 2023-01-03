@@ -9,7 +9,7 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace Application.Commands
 {
-    public class UpdateBoard : IRequest<Board>
+    public class UpdateBoard : IRequest<BoardEntity>
     {
         public Guid BoardId { get; set; }
         public string? Name { get; set; }

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Queries
 {
-    public class GetAllUsers : IRequest<IEnumerable<User>>
+    public class GetAllUsers : IRequest<IEnumerable<UserEntity>>
     {
     }
 }

@@ -1,14 +1,13 @@
-using Application.Commands;
+
 using Infrastructure.Entities;
 using MediatR;
-using Infrastructure.Data;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.ActivityHandlers
+namespace Application.Handlers.Activity
 {
 
 
-    public class CreateActivityHandler : IRequestHandler<CreateActivity, Activity>
+    public class CreateActivityHandler : IRequestHandler<Commands.Activity, Infrastructure.Entities.ActivityEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -18,10 +17,10 @@ namespace Application.Handlers.ActivityHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Activity> Handle(CreateActivity request, CancellationToken cancellationToken)
+        public async Task<ActivityEntity> Handle(Commands.Activity request, CancellationToken cancellationToken)
         {
 
-            var activity = new Activity
+            var activity = new ActivityEntity
             {
                 Id = request.Id,
                 Name = request.Name,

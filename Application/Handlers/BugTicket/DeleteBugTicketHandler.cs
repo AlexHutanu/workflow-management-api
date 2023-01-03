@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.BugTicketHandlers
+namespace Application.Handlers.BugTicket
 {
-    public class DeleteBugTicketHandler : IRequestHandler<DeleteBugTicket, BugTicket>
+    public class DeleteBugTicketHandler : IRequestHandler<DeleteBugTicket, Infrastructure.Entities.BugTicketEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace Application.Handlers.BugTicketHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<BugTicket> Handle(DeleteBugTicket request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.BugTicketEntity> Handle(DeleteBugTicket request, CancellationToken cancellationToken)
         {
             var bugTicket = await _unitOfWork.BugTickets.GetById(request.BugTicketId);
 

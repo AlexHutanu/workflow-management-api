@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.UserHandlers
+namespace Application.Handlers.User
 {
-    public class UpdateUserHandler : IRequestHandler<UpdateUser, User>
+    public class UpdateUserHandler : IRequestHandler<UpdateUser, Infrastructure.Entities.UserEntity>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,9 +19,9 @@ namespace Application.Handlers.UserHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<User> Handle(UpdateUser request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.UserEntity> Handle(UpdateUser request, CancellationToken cancellationToken)
         {
-            var toUpdate = new User();
+            var toUpdate = new Infrastructure.Entities.UserEntity();
 
             toUpdate.Id = request.UserId;
             toUpdate.Name = request.Name;

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Queries
 {
-    public class GetAllBoards : IRequest<IEnumerable<Board>>
+    public class GetAllBoards : IRequest<IEnumerable<BoardEntity>>
     {
     }
 }

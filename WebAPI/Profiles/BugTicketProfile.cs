@@ -7,8 +7,8 @@ namespace WebAPI.Profiles
     public class BugTicketProfile : Profile
     {
         public BugTicketProfile() {
-            CreateMap<BugTicket, ReadBugTicketModel>();
-            CreateMap<WriteBugTicketModel, BugTicket>();
+            CreateMap<BugTicketEntity, ReadBugTicketModel>();
+            CreateMap<WriteBugTicketModel, BugTicketEntity>();
         }   
     }
 }

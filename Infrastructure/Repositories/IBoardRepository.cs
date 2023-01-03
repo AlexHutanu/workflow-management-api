@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public interface IBoardRepository : IGenericRepository<Board>
+    public interface IBoardRepository : IGenericRepository<BoardEntity>
     {
     }
 }

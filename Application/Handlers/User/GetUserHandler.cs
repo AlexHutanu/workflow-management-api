@@ -4,10 +4,10 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 
-namespace Application.Handlers.UserHandlers;
+namespace Application.Handlers.User;
 
 
-public class GetUserHandler : IRequestHandler<GetUser, User>
+public class GetUserHandler : IRequestHandler<GetUser, Infrastructure.Entities.UserEntity>
 {
 
     private readonly ApplicationDbContext _context;
@@ -17,7 +17,7 @@ public class GetUserHandler : IRequestHandler<GetUser, User>
         _context = context;
     }
 
-    public async Task<User> Handle(GetUser request, CancellationToken cancellationToken)
+    public async Task<Infrastructure.Entities.UserEntity> Handle(GetUser request, CancellationToken cancellationToken)
     {
         return await _context.Users.FirstAsync(user => user.Id == request.Id,
             cancellationToken: cancellationToken);

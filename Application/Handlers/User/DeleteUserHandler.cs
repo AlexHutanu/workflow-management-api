@@ -8,9 +8,9 @@ using Infrastructure.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 
-namespace Application.Handlers.UserHandlers
+namespace Application.Handlers.User
 {
-    public class DeleteUserHandler : IRequestHandler<DeleteUser, User>
+    public class DeleteUserHandler : IRequestHandler<DeleteUser, Infrastructure.Entities.UserEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -20,7 +20,7 @@ namespace Application.Handlers.UserHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<User> Handle(DeleteUser request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.UserEntity> Handle(DeleteUser request, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.Users.GetById(request.UserId);
 

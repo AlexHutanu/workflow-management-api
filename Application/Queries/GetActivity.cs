@@ -4,7 +4,7 @@ using MediatR;
 namespace Application.Queries
 {
 
-    public class GetActivity : IRequest<Activity>
+    public class GetActivity : IRequest<ActivityEntity>
     {
         public Guid Id { get; }
 

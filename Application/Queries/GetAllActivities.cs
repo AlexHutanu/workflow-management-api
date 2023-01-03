@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Queries
 {
-    public class GetAllActivities : IRequest<IEnumerable<Activity>>
+    public class GetAllActivities : IRequest<IEnumerable<ActivityEntity>>
     {
     }
 }

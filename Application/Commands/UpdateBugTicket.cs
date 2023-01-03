@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Commands
 {
-    public class UpdateBugTicket : IRequest<BugTicket>
+    public class UpdateBugTicket : IRequest<BugTicketEntity>
     {
         public Guid BugTicketId { get; set; }
         public string? Name { get; set; }

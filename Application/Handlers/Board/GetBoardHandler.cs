@@ -4,9 +4,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 
-namespace Application.Handlers.BoardHandlers
+namespace Application.Handlers.Board
 {
-    public class GetBoardHandler : IRequestHandler<GetBoard, Board>
+    public class GetBoardHandler : IRequestHandler<GetBoard, Infrastructure.Entities.BoardEntity>
     {
         private readonly ApplicationDbContext _context;
 
@@ -15,7 +15,7 @@ namespace Application.Handlers.BoardHandlers
             _context = context;
         }
 
-        public async Task<Board> Handle(GetBoard request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.BoardEntity> Handle(GetBoard request, CancellationToken cancellationToken)
         {
             return await _context.Boards.FirstAsync(board => board.Id == request.Id, cancellationToken: cancellationToken);
         }

@@ -30,7 +30,7 @@ namespace Application.Handlers
                 var bytes = Convert.FromBase64String(authenticationHeaderValue.Parameter);
                 var credentials = Encoding.UTF8.GetString(bytes);
 
-                User user = _context.Users.FirstOrDefault(user => user.Name == credentials);
+                Infrastructure.Entities.UserEntity user = _context.Users.FirstOrDefault(user => user.Name == credentials);
 
                 if (user == null)
                 {

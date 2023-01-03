@@ -8,8 +8,8 @@ namespace WebAPI.Profiles
     {
         public ActivityProfile()
         {
-            CreateMap<Activity, ReadActivityModel>();
-            CreateMap<WriteActivityModel, Activity>();
+            CreateMap<ActivityEntity, ReadActivityModel>();
+            CreateMap<WriteActivityModel, ActivityEntity>();
         }
     }
 }

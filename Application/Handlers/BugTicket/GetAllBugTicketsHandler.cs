@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Infrastructure.Entities;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.BugTicketHandlers
+namespace Application.Handlers.BugTicket
 {
-    public class GetAllBugTicketsHandler : IRequestHandler<GetAllBugTickets, IEnumerable<BugTicket>>
+    public class GetAllBugTicketsHandler : IRequestHandler<GetAllBugTickets, IEnumerable<Infrastructure.Entities.BugTicketEntity>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace Application.Handlers.BugTicketHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<BugTicket>> Handle(GetAllBugTickets request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Infrastructure.Entities.BugTicketEntity>> Handle(GetAllBugTickets request, CancellationToken cancellationToken)
         {
             return await _unitOfWork.BugTickets.GetAll();
         }

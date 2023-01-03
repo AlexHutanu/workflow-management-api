@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Infrastructure.Entities;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.UserHandlers
+namespace Application.Handlers.User
 {
-    public class GetAllUsersHandler : IRequestHandler<GetAllUsers, IEnumerable<User>>
+    public class GetAllUsersHandler : IRequestHandler<GetAllUsers, IEnumerable<Infrastructure.Entities.UserEntity>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace Application.Handlers.UserHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<User>> Handle(GetAllUsers request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Infrastructure.Entities.UserEntity>> Handle(GetAllUsers request, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Users.GetAll();
         }

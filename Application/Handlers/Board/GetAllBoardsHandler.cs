@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Infrastructure.Entities;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.BoardHandlers
+namespace Application.Handlers.Board
 {
-    public class GetAllBoardsHandler : IRequestHandler<GetAllBoards, IEnumerable<Board>>
+    public class GetAllBoardsHandler : IRequestHandler<GetAllBoards, IEnumerable<Infrastructure.Entities.BoardEntity>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace Application.Handlers.BoardHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Board>> Handle(GetAllBoards request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Infrastructure.Entities.BoardEntity>> Handle(GetAllBoards request, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Boards.GetAll();
         }

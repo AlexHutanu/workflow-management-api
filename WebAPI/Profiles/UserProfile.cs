@@ -9,8 +9,8 @@ namespace WebAPI.Profiles
     {
         public UserProfile() {
 
-            CreateMap<User, ReadUserModel>();
-            CreateMap<WriteUserModel, User>();
+            CreateMap<UserEntity, ReadUserModel>();
+            CreateMap<WriteUserModel, UserEntity>();
         }
     }
 }

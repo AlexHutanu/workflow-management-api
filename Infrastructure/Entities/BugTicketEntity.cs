@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Entities;
 
-public class BugTicket : Ticket
+public class BugTicketEntity: TicketEntity
 {
     [Column("steps_to_reproduce", TypeName = "varchar(200)")]
     public string? StepsToReproduce { get; set; }
@@ -13,7 +13,7 @@ public class BugTicket : Ticket
     [Column("actual_result", TypeName = "varchar(200)")]
     public string? ActualResult { get; set; }
 
-    public Board Board { get; set; }
+    public BoardEntity Board { get; set; }
 
     public Guid BoardForeignKey { get; set; }
 

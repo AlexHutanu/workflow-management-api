@@ -31,7 +31,7 @@ public class ActivitiesController : Controller
             return BadRequest(ModelState);
         }
 
-        var command = new CreateActivity() {
+        Activity command = new() {
             Name = activity.Name,
             Description = activity.Description,
         };

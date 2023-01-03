@@ -1,13 +1,12 @@
 using Application.Commands;
 using Infrastructure.Entities;
 using MediatR;
-using Infrastructure.Data;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.BugTicketHandlers
+namespace Application.Handlers.BugTicket
 {
 
-    public class CreateBugTicketHandler : IRequestHandler<CreateBugTicket, BugTicket>
+    public class CreateBugTicketHandler : IRequestHandler<CreateBugTicket, Infrastructure.Entities.BugTicketEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -17,10 +16,10 @@ namespace Application.Handlers.BugTicketHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<BugTicket> Handle(CreateBugTicket request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.BugTicketEntity> Handle(CreateBugTicket request, CancellationToken cancellationToken)
         {
 
-            var bugTicket = new BugTicket
+            var bugTicket = new Infrastructure.Entities.BugTicketEntity
             {
                 Id = request.Id,
                 Name = request.Name,

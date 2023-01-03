@@ -1,5 +1,5 @@
 using Application.Handlers;
-using Application.Handlers.ActivityHandlers;
+using Application.Handlers.Activity;
 using Infrastructure.Data;
 using Infrastructure.Interfaces;
 using MediatR;
@@ -14,6 +14,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "_myAllowSpecificOrigins", policy =>
+    {
+        policy
+        .AllowAnyHeader()
+        .AllowAnyOrigin()
+        .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 
@@ -41,6 +52,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("_myAllowSpecificOrigins");
 
 //app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 

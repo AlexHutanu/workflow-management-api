@@ -4,7 +4,7 @@ using MediatR;
 namespace Application.Queries
 {
 
-    public class GetBugTicket : IRequest<BugTicket>
+    public class GetBugTicket : IRequest<BugTicketEntity>
     {
         public Guid Id { get; }
 
