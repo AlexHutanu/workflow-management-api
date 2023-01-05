@@ -10,31 +10,28 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.BugTicket
 {
-    public class UpdateBugTicketHandler : IRequestHandler<UpdateBugTicket, Infrastructure.Entities.BugTicketEntity>
+    public class UpdateTicketHandler : IRequestHandler<UpdateTicket, Infrastructure.Entities.TicketEntity>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateBugTicketHandler(IUnitOfWork unitOfWork)
+        public UpdateTicketHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.BugTicketEntity> Handle(UpdateBugTicket request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.TicketEntity> Handle(UpdateTicket request, CancellationToken cancellationToken)
         {
-            var toUpdate = new Infrastructure.Entities.BugTicketEntity();
+            var toUpdate = new Infrastructure.Entities.TicketEntity();
 
-            toUpdate.Id = request.BugTicketId;
+            toUpdate.Id = request.TicketId;
             toUpdate.Name = request.Name;
             toUpdate.Description = request.Description;
             toUpdate.Asignee = request.Asignee;
-            toUpdate.StepsToReproduce = request.StepsToReproduce;
             toUpdate.Deadline = request.Deadline;
-            toUpdate.ActualResult = request.ActualResult;
-            toUpdate.ExpectedResult = request.ExpectedResult;
             toUpdate.Status = request.Status;
 
 
-            await _unitOfWork.BugTickets.Update(toUpdate);
+            await _unitOfWork.Tickets.Update(toUpdate);
             await _unitOfWork.CompleteAsync();
 
             return toUpdate;

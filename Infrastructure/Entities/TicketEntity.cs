@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Infrastructure.Entities;
 
 
-public abstract class TicketEntity : BaseEntity
+public class TicketEntity : BaseEntity
 {
 
     [Column("name", TypeName = "varchar(200)")]
@@ -24,6 +24,13 @@ public abstract class TicketEntity : BaseEntity
 
     [Column("status", TypeName = "varchar(200)")]
     public string? Status { get; set; }
+
+    public BoardEntity Board { get; set; }
+
+    public Guid BoardForeignKey { get; set; }
+
+    public TicketType TicketType { get; set; }
+    
 
 }
 

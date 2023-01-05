@@ -4,7 +4,7 @@ using MediatR;
 namespace Application.Commands
 {
 
-    public class CreateBugTicket : IRequest<BugTicketEntity>
+    public class CreateTicket : IRequest<TicketEntity>
     {
         public Guid Id { get; set; }
 
@@ -20,12 +20,8 @@ namespace Application.Commands
 
         public string? Status { get; set; }
 
-        public string? StepsToReproduce { get; set; }
+        public TicketType TicketType { get; set; }
 
-        public string? ExpectedResult { get; set; }
-
-        public string? ActualResult { get; set; }
-        
         public Guid BoardForeignKey { get; set; }
     }
 }

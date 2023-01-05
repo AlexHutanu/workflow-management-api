@@ -12,13 +12,13 @@ namespace Infrastructure.Data
             _context = context;
 
             Users = new UserRepository(context);
-            BugTickets = new BugTicketRepository(context);
+            Tickets = new TicketRepository(context);
             Boards = new BoardRepository(context);
             Activities = new ActivityRepository(context);
         }
 
         public UserRepository? Users { get; private set;}
-        public BugTicketRepository? BugTickets { get; private set; }
+        public TicketRepository? Tickets { get; private set; }
 
         public BoardRepository? Boards { get; private set; }
 

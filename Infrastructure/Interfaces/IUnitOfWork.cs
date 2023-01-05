@@ -5,7 +5,7 @@ namespace Infrastructure.Interfaces
     public interface IUnitOfWork
     {
         UserRepository Users { get; }
-        BugTicketRepository BugTickets { get; }
+        TicketRepository Tickets { get; }
         ActivityRepository Activities { get; }
         BoardRepository Boards { get; }
 

@@ -10,18 +10,18 @@ using Infrastructure.Interfaces;
 
 namespace Application.Handlers.BugTicket
 {
-    public class GetAllBugTicketsHandler : IRequestHandler<GetAllBugTickets, IEnumerable<Infrastructure.Entities.BugTicketEntity>>
+    public class GetAllTicketsHandler : IRequestHandler<GetAllTickets, IEnumerable<Infrastructure.Entities.TicketEntity>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetAllBugTicketsHandler(IUnitOfWork unitOfWork)
+        public GetAllTicketsHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Infrastructure.Entities.BugTicketEntity>> Handle(GetAllBugTickets request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Infrastructure.Entities.TicketEntity>> Handle(GetAllTickets request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.BugTickets.GetAll();
+            return await _unitOfWork.Tickets.GetAll();
         }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221217204843_InitialCreate")]
+    [Migration("20230104143035_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Infrastructure.Entities.Activity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.ActivityEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Board", b =>
+            modelBuilder.Entity("Infrastructure.Entities.BoardEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,15 +86,11 @@ namespace Infrastructure.Migrations
                     b.ToTable("Boards");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.BugTicket", b =>
+            modelBuilder.Entity("Infrastructure.Entities.TicketEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ActualResult")
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("actual_result");
 
                     b.Property<string>("Asignee")
                         .HasColumnType("varchar(200)")
@@ -112,10 +108,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("description");
 
-                    b.Property<string>("ExpectedResult")
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("expected_result");
-
                     b.Property<string>("Name")
                         .HasColumnType("varchar(200)")
                         .HasColumnName("name");
@@ -128,10 +120,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("status");
 
-                    b.Property<string>("StepsToReproduce")
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("steps_to_reproduce");
-
                     b.Property<string>("TimeCreated")
                         .IsRequired()
                         .HasColumnType("varchar(200)")
@@ -141,10 +129,10 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("BoardForeignKey");
 
-                    b.ToTable("BugTickets");
+                    b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.User", b =>
+            modelBuilder.Entity("Infrastructure.Entities.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -172,10 +160,10 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.BugTicket", b =>
+            modelBuilder.Entity("Infrastructure.Entities.TicketEntity", b =>
                 {
-                    b.HasOne("Infrastructure.Entities.Board", "Board")
-                        .WithMany("BugTickets")
+                    b.HasOne("Infrastructure.Entities.BoardEntity", "Board")
+                        .WithMany("Tickets")
                         .HasForeignKey("BoardForeignKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -183,9 +171,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Board");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entities.Board", b =>
+            modelBuilder.Entity("Infrastructure.Entities.BoardEntity", b =>
                 {
-                    b.Navigation("BugTickets");
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

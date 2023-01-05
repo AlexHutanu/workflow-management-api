@@ -14,7 +14,7 @@ namespace WebAPI.Models.Board
 
         public int NoOfTickets { get; set; }
 
-        public ICollection<Infrastructure.Entities.BugTicketEntity> BugTickets { get; set; }
+        public ICollection<Infrastructure.Entities.TicketEntity> BugTickets { get; set; }
     }
 }
 

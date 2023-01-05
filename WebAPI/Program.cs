@@ -1,6 +1,7 @@
 using Application.Handlers;
 using Application.Handlers.Activity;
 using Infrastructure.Data;
+using Infrastructure.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -59,3 +60,7 @@ app.UseCors("_myAllowSpecificOrigins");
 app.MapControllers();
 
 app.Run();
+
+TicketType ticket = TicketType.BugTicket;
+
+Console.WriteLine(ticket);

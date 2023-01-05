@@ -1,6 +1,8 @@
-﻿namespace WebAPI.Models.BugTicket
+﻿using Infrastructure.Entities;
+
+namespace WebAPI.Models.BugTicket
 {
-    public class WriteBugTicketModel
+    public class WriteTicketModel
     {
         public string? Name { get; set; }
 
@@ -17,6 +19,8 @@
         public string? ExpectedResult { get; set; }
 
         public string? ActualResult { get; set; }
+
+        public TicketType TicketType { get; set; }
 
         public Guid BoardId { get; set; }
     }

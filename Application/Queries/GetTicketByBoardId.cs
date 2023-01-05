@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Application.Queries
 {
-    public class GetBugTicketByBoardId : IRequest<IEnumerable<BugTicketEntity>>
+    public class GetTicketByBoardId : IRequest<IEnumerable<TicketEntity>>
     {
         public Guid BoardId { get; }
 
-        public GetBugTicketByBoardId(Guid id)
+        public GetTicketByBoardId(Guid id)
         {
             BoardId = id;
         }

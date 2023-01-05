@@ -6,20 +6,20 @@ using Infrastructure.Interfaces;
 namespace Application.Handlers.BugTicket
 {
 
-    public class CreateBugTicketHandler : IRequestHandler<CreateBugTicket, Infrastructure.Entities.BugTicketEntity>
+    public class CreateTicketHandler : IRequestHandler<CreateTicket, Infrastructure.Entities.TicketEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateBugTicketHandler(IUnitOfWork unitOfWork)
+        public CreateTicketHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.BugTicketEntity> Handle(CreateBugTicket request, CancellationToken cancellationToken)
+        public async Task<Infrastructure.Entities.TicketEntity> Handle(CreateTicket request, CancellationToken cancellationToken)
         {
 
-            var bugTicket = new Infrastructure.Entities.BugTicketEntity
+            var ticket = new Infrastructure.Entities.TicketEntity
             {
                 Id = request.Id,
                 Name = request.Name,
@@ -28,16 +28,13 @@ namespace Application.Handlers.BugTicket
                 Description = request.Description,
                 Deadline = request.Deadline,
                 Status = request.Status,
-                StepsToReproduce = request.StepsToReproduce,
-                ExpectedResult = request.ExpectedResult,
-                ActualResult = request.ActualResult,
                 BoardForeignKey = request.BoardForeignKey
             };
 
-            await _unitOfWork.BugTickets.Add(bugTicket);
+            await _unitOfWork.Tickets.Add(ticket);
             await _unitOfWork.CompleteAsync();
 
-            return bugTicket;
+            return ticket;
         }
     }
 }

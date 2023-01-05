@@ -58,27 +58,24 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BugTickets",
+                name: "Tickets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    stepstoreproduce = table.Column<string>(name: "steps_to_reproduce", type: "varchar(200)", nullable: true),
-                    expectedresult = table.Column<string>(name: "expected_result", type: "varchar(200)", nullable: true),
-                    actualresult = table.Column<string>(name: "actual_result", type: "varchar(200)", nullable: true),
-                    BoardForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false),
                     name = table.Column<string>(type: "varchar(200)", nullable: true),
                     asignee = table.Column<string>(type: "varchar(200)", nullable: true),
                     reporter = table.Column<string>(type: "varchar(200)", nullable: true),
                     description = table.Column<string>(type: "varchar(200)", nullable: true),
                     deadline = table.Column<string>(type: "varchar(200)", nullable: false),
-                    status = table.Column<string>(type: "varchar(200)", nullable: true)
+                    status = table.Column<string>(type: "varchar(200)", nullable: true),
+                    BoardForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BugTickets", x => x.Id);
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BugTickets_Boards_BoardForeignKey",
+                        name: "FK_Tickets_Boards_BoardForeignKey",
                         column: x => x.BoardForeignKey,
                         principalTable: "Boards",
                         principalColumn: "Id",
@@ -86,8 +83,8 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BugTickets_BoardForeignKey",
-                table: "BugTickets",
+                name: "IX_Tickets_BoardForeignKey",
+                table: "Tickets",
                 column: "BoardForeignKey");
         }
 
@@ -98,7 +95,7 @@ namespace Infrastructure.Migrations
                 name: "Activities");
 
             migrationBuilder.DropTable(
-                name: "BugTickets");
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Users");

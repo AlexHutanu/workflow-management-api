@@ -20,17 +20,17 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<BugTicketEntity>()
+        modelBuilder.Entity<TicketEntity>()
             .Property("BoardForeignKey");
 
-        modelBuilder.Entity<BugTicketEntity>()
+        modelBuilder.Entity<TicketEntity>()
             .HasOne(p => p.Board)
-            .WithMany(p => p.BugTickets)
+            .WithMany(p => p.Tickets)
             .HasForeignKey("BoardForeignKey");
     }
 
     public DbSet<BoardEntity> Boards { get; set; }
-    public DbSet<BugTicketEntity> BugTickets { get; set; }
+    public DbSet<TicketEntity> Tickets { get; set; }
     public DbSet<ActivityEntity> Activities { get; set; }
     public DbSet<UserEntity> Users { get; set; }
 }

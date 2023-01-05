@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public interface IBugTicketRepository : IGenericRepository<BugTicketEntity>
+    public interface ITicketRepository : IGenericRepository<TicketEntity>
     {
     }
 }

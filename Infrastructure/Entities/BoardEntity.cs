@@ -18,5 +18,5 @@ public class BoardEntity : BaseEntity
     [Column("NoOfTickets", TypeName = "varchar(200)")]
     public int NoOfTickets { get; set; }
 
-    public ICollection<BugTicketEntity>? BugTickets { get; set; }
+    public ICollection<TicketEntity>? Tickets { get; set; }
 }

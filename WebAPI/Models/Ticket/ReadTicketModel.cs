@@ -1,6 +1,8 @@
-﻿namespace WebAPI.Models.BugTicket
+﻿using Infrastructure.Entities;
+
+namespace WebAPI.Models.BugTicket
 {
-    public class ReadBugTicketModel
+    public class ReadTicketModel
     {
         public Guid Id { get; set; }
 
@@ -16,11 +18,6 @@
 
         public string? Status { get; set; }
 
-        public string? StepsToReproduce { get; set; }
-
-        public string? ExpectedResult { get; set; }
-
-        public string? ActualResult { get; set; }
-
+        public TicketType TicketType { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Queries
 {
-    public class GetAllBugTickets : IRequest<IEnumerable<BugTicketEntity>>
+    public class GetAllTickets : IRequest<IEnumerable<TicketEntity>>
     {
     }
 }
