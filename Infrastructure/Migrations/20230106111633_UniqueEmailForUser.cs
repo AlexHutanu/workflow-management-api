@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class UniqueEmailForUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,6 +69,7 @@ namespace Infrastructure.Migrations
                     deadline = table.Column<string>(type: "varchar(200)", nullable: false),
                     status = table.Column<string>(type: "varchar(200)", nullable: true),
                     BoardForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TicketType = table.Column<int>(type: "int", nullable: false),
                     TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
@@ -86,6 +87,13 @@ namespace Infrastructure.Migrations
                 name: "IX_Tickets_BoardForeignKey",
                 table: "Tickets",
                 column: "BoardForeignKey");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
         }
 
         /// <inheritdoc />

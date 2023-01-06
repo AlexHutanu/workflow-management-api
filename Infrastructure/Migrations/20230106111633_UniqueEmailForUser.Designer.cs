@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230104143035_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230106111633_UniqueEmailForUser")]
+    partial class UniqueEmailForUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,6 +120,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("status");
 
+                    b.Property<int>("TicketType")
+                        .HasColumnType("int");
+
                     b.Property<string>("TimeCreated")
                         .IsRequired()
                         .HasColumnType("varchar(200)")
@@ -156,6 +159,10 @@ namespace Infrastructure.Migrations
                         .HasColumnName("TimeCreated");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Users");
                 });

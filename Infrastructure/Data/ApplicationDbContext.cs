@@ -27,6 +27,7 @@ public class ApplicationDbContext : DbContext
             .HasOne(p => p.Board)
             .WithMany(p => p.Tickets)
             .HasForeignKey("BoardForeignKey");
+        modelBuilder.Entity<UserEntity>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
     }
 
     public DbSet<BoardEntity> Boards { get; set; }

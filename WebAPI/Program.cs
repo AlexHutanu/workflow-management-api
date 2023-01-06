@@ -3,9 +3,9 @@ using Application.Handlers.Activity;
 using Infrastructure.Data;
 using Infrastructure.Entities;
 using Infrastructure.Interfaces;
+using Infrastructure.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
-using WebAPI.Middlewares;
+using WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,23 +22,19 @@ builder.Services.AddCors(options =>
     {
         policy
         .AllowAnyHeader()
-        .AllowAnyOrigin()
+        .AllowCredentials()
         .AllowAnyMethod();
     });
 });
 
 builder.Services.AddControllers();
-
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<Jwt>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddMediatR(typeof(CreateActivityHandler));
-
-builder.Services.AddAuthentication("BasicAuthentication")
-    .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("BasicAuthentication", null);
-
-//builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 
 var app = builder.Build();
@@ -55,12 +51,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("_myAllowSpecificOrigins");
 
-//app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
 app.Run();
 
-TicketType ticket = TicketType.BugTicket;
-
-Console.WriteLine(ticket);

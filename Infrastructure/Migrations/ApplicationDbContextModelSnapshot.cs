@@ -117,6 +117,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("status");
 
+                    b.Property<int>("TicketType")
+                        .HasColumnType("int");
+
                     b.Property<string>("TimeCreated")
                         .IsRequired()
                         .HasColumnType("varchar(200)")
@@ -153,6 +156,10 @@ namespace Infrastructure.Migrations
                         .HasColumnName("TimeCreated");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Users");
                 });

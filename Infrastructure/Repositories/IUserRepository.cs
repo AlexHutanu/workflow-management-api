@@ -9,6 +9,6 @@ namespace Infrastructure.Repositories
 {
     public interface IUserRepository : IGenericRepository<UserEntity>
     {
-
+        UserEntity GetByEmail(string email);
     }
 }

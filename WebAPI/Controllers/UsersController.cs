@@ -4,6 +4,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Models.Auth;
 using WebAPI.Models.User;
 
 namespace WebAPI.Controllers
@@ -28,7 +29,7 @@ namespace WebAPI.Controllers
             var command = new CreateUser() {
                 Name = user.Name,
                 Email = user.Email,
-                Password = user.Password
+                Password = BCrypt.Net.BCrypt.HashPassword(user.Password)
             };
 
             var result = await _mediator.Send(command);
@@ -37,7 +38,6 @@ namespace WebAPI.Controllers
             return Ok(mappedResult);
         }
 
-        [Authorize]
         [HttpGet("id")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         {
             var result = await _mediator.Send(new GetAllUsers());
 
-            var mappedResult = _mapper.Map<ReadUserModel>(result);
+            var mappedResult = _mapper.Map<List<ReadUserModel>>(result);
 
             return Ok(mappedResult);
         }
