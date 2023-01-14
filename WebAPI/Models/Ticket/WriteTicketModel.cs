@@ -14,14 +14,6 @@ namespace WebAPI.Models.BugTicket
 
         public string? Status { get; set; }
 
-        public string? StepsToReproduce { get; set; }
-
-        public string? ExpectedResult { get; set; }
-
-        public string? ActualResult { get; set; }
-
-        public TicketType TicketType { get; set; }
-
         public Guid BoardId { get; set; }
     }
 }

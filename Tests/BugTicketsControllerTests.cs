@@ -59,9 +59,6 @@ namespace Tests
                 Asignee = "Test",
                 Deadline = 0,
                 Status = "Test",
-                StepsToReproduce = "Test",
-                ExpectedResult = "Test", 
-                ActualResult= "Test",
             };
 
             _mockMediator
@@ -85,9 +82,7 @@ namespace Tests
                 Asignee = "Test",
                 Deadline = 0, 
                 Status = "Test",
-                StepsToReproduce = "Test",
-                ExpectedResult = "Test",
-                ActualResult = "Test",
+
             };
 
             _mockMediator

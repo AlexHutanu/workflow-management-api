@@ -28,8 +28,6 @@ public class TicketEntity : BaseEntity
     public BoardEntity Board { get; set; }
 
     public Guid BoardForeignKey { get; set; }
-
-    public TicketType TicketType { get; set; }
     
 
 }

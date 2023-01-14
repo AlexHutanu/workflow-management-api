@@ -60,10 +60,32 @@ public class BoardsController : Controller
     public async Task<IActionResult> Get()
     {
         var result = await _mediator.Send(new GetAllBoards());
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
         var mappedResult = _mapper.Map<List<ReadBoardModel>>(result);
 
         return Ok(mappedResult);
     }
+
+    [HttpGet("board")]
+    public async Task<IActionResult> GetByName([FromQuery(Name = "name")] string name)
+    {
+        var result = await _mediator.Send(new GetBoardByName(name));
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<List<ReadBoardModel>>(result);
+
+        return Ok(mappedResult);
+    }
+
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)

@@ -30,7 +30,6 @@ public class TicketsController : Controller
             Description = ticket.Description,
             Deadline = ticket.Deadline,
             Status = ticket.Status,
-            TicketType = ticket.TicketType,
             BoardForeignKey = ticket.BoardId
         };
 

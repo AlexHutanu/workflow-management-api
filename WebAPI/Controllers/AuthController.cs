@@ -1,9 +1,11 @@
 ﻿using Application.Commands;
 using AutoMapper;
+using Azure.Core;
 using Infrastructure.Entities;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using WebAPI.Models.Auth;
 using WebAPI.Models.User;
 using WebAPI.Services;
@@ -59,33 +61,37 @@ namespace WebAPI.Controllers
 
             var jwt = _jwt.Generate(user.Id);
 
-            Response.Cookies.Append("jwt", jwt, new CookieOptions
-            {
-                HttpOnly = true
-            });
 
             return Ok(new
             {
-                message = "Success"
+                message = "Success", token=jwt
             });
         }
 
         [HttpGet("user")]
         public async Task<IActionResult> User()
         {
-
+            
             try
             {
 
-                var jwt = Request.Cookies["jwt"];
+                if (!Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                
+                  return Unauthorized();
+                
+                string token = Request.Headers["Authorization"];
 
-                var token = _jwt.Verify(jwt);
+                var jwt = token.Split(" ")[1];
 
-                Guid userId = Guid.Parse(token.Issuer);
+                var verifiedToken = _jwt.Verify(jwt);
+
+                Guid userId = Guid.Parse(verifiedToken.Issuer);
 
                 var user = await _repository.GetById(userId);
 
+
                 return Ok(user);
+
             }catch (Exception e)
             {
                 return Unauthorized();

@@ -20,8 +20,6 @@ namespace Application.Commands
 
         public string? Status { get; set; }
 
-        public TicketType TicketType { get; set; }
-
         public Guid BoardForeignKey { get; set; }
     }
 }

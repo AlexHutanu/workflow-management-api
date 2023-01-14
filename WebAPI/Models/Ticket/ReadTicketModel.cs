@@ -17,7 +17,5 @@ namespace WebAPI.Models.BugTicket
         public double Deadline { get; set; }
 
         public string? Status { get; set; }
-
-        public TicketType TicketType { get; set; }
     }
 }
