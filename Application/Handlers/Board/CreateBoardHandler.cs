@@ -26,6 +26,7 @@ namespace Application.Handlers.Board
                 Owner = request.Owner,
                 Description = request.Description,
                 NoOfTickets = request.NoOfTickets,
+                UserId = request.UserId,
             };
 
             await _unitOfWork.Boards.Add(board);

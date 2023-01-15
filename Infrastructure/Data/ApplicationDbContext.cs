@@ -21,12 +21,35 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TicketEntity>()
-            .Property("BoardForeignKey");
+            .Property("BoardId");
+
+        modelBuilder.Entity<TicketEntity>()
+            .Property("UserId");
+
+        modelBuilder.Entity<BoardEntity>()
+            .Property("UserId");
+
+            
 
         modelBuilder.Entity<TicketEntity>()
             .HasOne(p => p.Board)
             .WithMany(p => p.Tickets)
-            .HasForeignKey("BoardForeignKey");
+            .OnDelete(DeleteBehavior.NoAction)
+            .HasForeignKey("BoardId");
+
+        modelBuilder.Entity<TicketEntity>()
+            .HasOne(p => p.User)
+            .WithMany(p => p.Tickets)
+            .OnDelete(DeleteBehavior.NoAction)
+            .HasForeignKey("UserId");
+
+        modelBuilder.Entity<BoardEntity>()
+            .HasOne(p => p.User)
+            .WithMany(p => p.Boards)
+            .OnDelete(DeleteBehavior.NoAction)
+            .HasForeignKey("UserId");
+
+
         modelBuilder.Entity<UserEntity>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
     }
 

@@ -15,6 +15,8 @@ namespace Application.Commands
 
         public int NoOfTickets { get; set; }
 
+        public Guid UserId { get; set; }
+    
         public bool IsPrimary { get; set; }
     }
 }

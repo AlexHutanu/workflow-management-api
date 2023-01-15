@@ -20,6 +20,8 @@ namespace Application.Commands
 
         public string? Status { get; set; }
 
-        public Guid BoardForeignKey { get; set; }
+        public Guid BoardId { get; set; }
+
+        public Guid UserId { get; set; }
     }
 }

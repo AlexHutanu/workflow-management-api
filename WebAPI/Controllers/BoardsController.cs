@@ -32,6 +32,7 @@ public class BoardsController : Controller
         var command = new CreateBoard() {
             Name = board.Name,
             Description = board.Description,
+            UserId = board.UserId
 
         };
 

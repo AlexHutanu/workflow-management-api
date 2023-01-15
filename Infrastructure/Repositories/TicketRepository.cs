@@ -18,7 +18,7 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Infrastructure.Entities.TicketEntity>> GetByBoardId(Guid boardId)
         {
-            return await dbSet.Where(ticket => ticket.BoardForeignKey == boardId).ToListAsync();
+            return await dbSet.Where(ticket => ticket.BoardId == boardId).ToListAsync();
             
         }
     }

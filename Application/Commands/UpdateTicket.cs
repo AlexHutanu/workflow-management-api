@@ -12,5 +12,7 @@ namespace Application.Commands
         public string? Status { get; set; }
         public double Deadline { get; set; }
         public Guid BoardId { get; set; }
+
+        public Guid UserId { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class UniqueEmailForUser : Migration
+    public partial class CreaterelationbetweenUserandBoard : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,22 +27,6 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Boards",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "varchar(200)", nullable: true),
-                    OwnerName = table.Column<string>(type: "varchar(200)", nullable: true),
-                    Description = table.Column<string>(type: "varchar(200)", nullable: true),
-                    NoOfTickets = table.Column<string>(type: "varchar(200)", nullable: false),
-                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Boards", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -58,35 +42,71 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Boards",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "varchar(200)", nullable: true),
+                    OwnerName = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Description = table.Column<string>(type: "varchar(200)", nullable: true),
+                    NoOfTickets = table.Column<string>(type: "varchar(200)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boards", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Boards_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    name = table.Column<string>(type: "varchar(200)", nullable: true),
-                    asignee = table.Column<string>(type: "varchar(200)", nullable: true),
-                    reporter = table.Column<string>(type: "varchar(200)", nullable: true),
-                    description = table.Column<string>(type: "varchar(200)", nullable: true),
-                    deadline = table.Column<string>(type: "varchar(200)", nullable: false),
-                    status = table.Column<string>(type: "varchar(200)", nullable: true),
-                    BoardForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TicketType = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Asignee = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Reporter = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Description = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Deadline = table.Column<string>(type: "varchar(200)", nullable: false),
+                    Status = table.Column<string>(type: "varchar(200)", nullable: true),
+                    BoardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tickets_Boards_BoardForeignKey",
-                        column: x => x.BoardForeignKey,
+                        name: "FK_Tickets_Boards_BoardId",
+                        column: x => x.BoardId,
                         principalTable: "Boards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Tickets_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_BoardForeignKey",
+                name: "IX_Boards_UserId",
+                table: "Boards",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_BoardId",
                 table: "Tickets",
-                column: "BoardForeignKey");
+                column: "BoardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_UserId",
+                table: "Tickets",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -106,10 +126,10 @@ namespace Infrastructure.Migrations
                 name: "Tickets");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Boards");
 
             migrationBuilder.DropTable(
-                name: "Boards");
+                name: "Users");
         }
     }
 }

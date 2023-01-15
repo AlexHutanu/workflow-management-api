@@ -30,7 +30,8 @@ public class TicketsController : Controller
             Description = ticket.Description,
             Deadline = ticket.Deadline,
             Status = ticket.Status,
-            BoardForeignKey = ticket.BoardId
+            BoardId = ticket.BoardId,
+            UserId = ticket.UserId
         };
 
         var result = await _mediator.Send(command);
@@ -105,7 +106,8 @@ public class TicketsController : Controller
             Asignee= ticket.Asignee,
             Deadline= ticket.Deadline,
             Status= ticket.Status,
-            BoardId = ticket.BoardId
+            BoardId = ticket.BoardId,
+            UserId = ticket.UserId
         };
 
         var result = await _mediator.Send(command);

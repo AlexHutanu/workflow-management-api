@@ -15,6 +15,8 @@ namespace WebAPI.Models.BugTicket
         public string? Status { get; set; }
 
         public Guid BoardId { get; set; }
+
+        public Guid UserId { get; set; }
     }
 }
 

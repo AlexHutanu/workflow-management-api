@@ -14,5 +14,8 @@ namespace Infrastructure.Entities
 
         [Column("Password", TypeName = "varchar(200)")]
         public string? Password { get; set; }
+
+        public ICollection<BoardEntity>? Boards { get; set; }
+        public ICollection<TicketEntity>? Tickets { get; set; }
     }
 }

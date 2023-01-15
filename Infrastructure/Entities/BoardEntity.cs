@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Infrastructure.Entities;
 
 public class BoardEntity : BaseEntity
-{ 
+{
 
     [Column("Name", TypeName = "varchar(200)")]
     public string? Name { get; set; }
-    
+
     [Column("OwnerName", TypeName = "varchar(200)")]
     public string? Owner { get; set; }
 
@@ -18,5 +18,8 @@ public class BoardEntity : BaseEntity
     [Column("NoOfTickets", TypeName = "varchar(200)")]
     public int NoOfTickets { get; set; }
 
+    public UserEntity User { get; set; }
+
+    public Guid UserId { get; set; }
     public ICollection<TicketEntity>? Tickets { get; set; }
 }

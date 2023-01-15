@@ -28,7 +28,8 @@ namespace Application.Handlers.BugTicket
                 Description = request.Description,
                 Deadline = request.Deadline,
                 Status = request.Status,
-                BoardForeignKey = request.BoardForeignKey
+                BoardId = request.BoardId,
+                UserId = request.UserId
             };
 
             await _unitOfWork.Tickets.Add(ticket);

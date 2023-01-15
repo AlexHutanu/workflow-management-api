@@ -27,6 +27,7 @@ namespace Application.Handlers.Board
             toUpdate.Name = request.Name;
             toUpdate.NoOfTickets = request.NoOfTickets;
             toUpdate.Id = request.BoardId;
+            toUpdate.UserId = request.UserId;
 
             await _unitOfWork.Boards.Update(toUpdate);
             await _unitOfWork.CompleteAsync();

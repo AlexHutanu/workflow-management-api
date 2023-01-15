@@ -78,7 +78,12 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("TimeCreated");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Boards");
                 });
@@ -91,40 +96,45 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Asignee")
                         .HasColumnType("varchar(200)")
-                        .HasColumnName("asignee");
+                        .HasColumnName("Asignee");
 
-                    b.Property<Guid>("BoardForeignKey")
+                    b.Property<Guid>("BoardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Deadline")
                         .IsRequired()
                         .HasColumnType("varchar(200)")
-                        .HasColumnName("deadline");
+                        .HasColumnName("Deadline");
 
                     b.Property<string>("Description")
                         .HasColumnType("varchar(200)")
-                        .HasColumnName("description");
+                        .HasColumnName("Description");
 
                     b.Property<string>("Name")
                         .HasColumnType("varchar(200)")
-                        .HasColumnName("name");
+                        .HasColumnName("Name");
 
                     b.Property<string>("Reporter")
                         .HasColumnType("varchar(200)")
-                        .HasColumnName("reporter");
+                        .HasColumnName("Reporter");
 
                     b.Property<string>("Status")
                         .HasColumnType("varchar(200)")
-                        .HasColumnName("status");
+                        .HasColumnName("Status");
 
                     b.Property<string>("TimeCreated")
                         .IsRequired()
                         .HasColumnType("varchar(200)")
                         .HasColumnName("TimeCreated");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BoardForeignKey");
+                    b.HasIndex("BoardId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tickets");
                 });
@@ -161,19 +171,45 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Infrastructure.Entities.BoardEntity", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.UserEntity", "User")
+                        .WithMany("Boards")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Infrastructure.Entities.TicketEntity", b =>
                 {
                     b.HasOne("Infrastructure.Entities.BoardEntity", "Board")
                         .WithMany("Tickets")
-                        .HasForeignKey("BoardForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("BoardId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.Entities.UserEntity", "User")
+                        .WithMany("Tickets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Board");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.BoardEntity", b =>
                 {
+                    b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.UserEntity", b =>
+                {
+                    b.Navigation("Boards");
+
                     b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
