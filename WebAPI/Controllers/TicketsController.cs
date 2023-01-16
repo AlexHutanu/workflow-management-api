@@ -80,6 +80,21 @@ public class TicketsController : Controller
         return Ok(mappedResult);
     }
 
+    [HttpGet("ticket")]
+    public async Task<IActionResult> GetByName([FromQuery(Name = "name")] string name)
+    {
+        var result = await _mediator.Send(new GetTicketByName(name));
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<List<ReadTicketModel>>(result);
+
+        return Ok(mappedResult);
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {

@@ -19,5 +19,10 @@ namespace Infrastructure.Repositories
         {
             return  dbSet.FirstOrDefault(user => user.Email == email);
         }
+
+        public async Task<IEnumerable<UserEntity>> GetByName(string name)
+        {
+            return await dbSet.Where(user => user.Name.Contains(name)).ToListAsync();
+        }
     }
 }

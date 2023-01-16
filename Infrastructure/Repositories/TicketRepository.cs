@@ -19,7 +19,11 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Infrastructure.Entities.TicketEntity>> GetByBoardId(Guid boardId)
         {
             return await dbSet.Where(ticket => ticket.BoardId == boardId).ToListAsync();
-            
+        }
+
+        public async Task<IEnumerable<TicketEntity>> GetByName(string name)
+        {
+            return await dbSet.Where(ticket => ticket.Name.Contains(name)).ToListAsync();
         }
     }
 }

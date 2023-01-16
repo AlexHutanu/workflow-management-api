@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.Auth;
+using WebAPI.Models.BugTicket;
 using WebAPI.Models.User;
 
 namespace WebAPI.Controllers
@@ -57,6 +58,21 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _mediator.Send(new GetAllUsers());
+
+            var mappedResult = _mapper.Map<List<ReadUserModel>>(result);
+
+            return Ok(mappedResult);
+        }
+
+        [HttpGet("user")]
+        public async Task<IActionResult> GetByName([FromQuery(Name = "name")] string name)
+        {
+            var result = await _mediator.Send(new GetUserByName(name));
+
+            if (result == null)
+            {
+                return NotFound();
+            }
 
             var mappedResult = _mapper.Map<List<ReadUserModel>>(result);
 
