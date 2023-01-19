@@ -1,4 +1,5 @@
 using Infrastructure.Entities;
+using Infrastructure.Enums;
 using MediatR;
 
 namespace Application.Commands
@@ -10,7 +11,7 @@ namespace Application.Commands
 
         public string? Name { get; set; }
 
-        public string? Asignee { get; set; }
+        public string? Assignee { get; set; }
 
         public string? Reporter { get; set; }
 
@@ -18,7 +19,7 @@ namespace Application.Commands
 
         public double Deadline { get; set; }
 
-        public string? Status { get; set; }
+        public TicketStatus Status { get; set; }
 
         public Guid BoardId { get; set; }
 

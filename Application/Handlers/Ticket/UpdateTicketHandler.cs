@@ -26,10 +26,12 @@ namespace Application.Handlers.BugTicket
             toUpdate.Id = request.TicketId;
             toUpdate.Name = request.Name;
             toUpdate.Description = request.Description;
-            toUpdate.Asignee = request.Asignee;
+            toUpdate.Assignee = request.Assignee;
             toUpdate.Deadline = request.Deadline;
             toUpdate.Status = request.Status;
-            toUpdate.UserId= request.UserId;
+            toUpdate.BoardId = request.BoardId;
+            toUpdate.UserId = request.UserId;
+
 
 
             await _unitOfWork.Tickets.Update(toUpdate);

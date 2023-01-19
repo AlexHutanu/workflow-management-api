@@ -23,7 +23,7 @@ namespace Application.Handlers.BugTicket
             {
                 Id = request.Id,
                 Name = request.Name,
-                Asignee = request.Asignee,
+                Assignee = request.Assignee,
                 Reporter = request.Reporter,
                 Description = request.Description,
                 Deadline = request.Deadline,

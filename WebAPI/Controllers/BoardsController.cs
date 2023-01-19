@@ -2,8 +2,10 @@
 using Application.Queries;
 using AutoMapper;
 using Infrastructure.Entities;
+using Infrastructure.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
@@ -19,11 +21,13 @@ public class BoardsController : Controller
 
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public BoardsController(IMediator mediator, IMapper mapper)
+    public BoardsController(IMediator mediator, IMapper mapper, IUnitOfWork unitOfWork)
     {
         _mediator = mediator;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
     [HttpPost]
@@ -119,5 +123,23 @@ public class BoardsController : Controller
             return NotFound();
 
         return Ok(result);
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Patch(Guid id, [FromBody] JsonPatchDocument<BoardEntity> boardUpdates)
+    {
+        var board = await _unitOfWork.Boards.GetById(id);
+
+        if (board == null)
+        {
+            return NotFound();
+        }
+
+        boardUpdates.ApplyTo(board);
+        await _unitOfWork.Boards.Update(board);
+
+        await _unitOfWork.CompleteAsync();
+
+        return Ok(board);
     }
 }

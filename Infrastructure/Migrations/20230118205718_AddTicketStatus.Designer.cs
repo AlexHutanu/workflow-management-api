@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230115231022_Create relation between User and Board")]
-    partial class CreaterelationbetweenUserandBoard
+    [Migration("20230118205718_AddTicketStatus")]
+    partial class AddTicketStatus
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,8 +121,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("Reporter");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("varchar(200)")
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
                         .HasColumnName("Status");
 
                     b.Property<string>("TimeCreated")

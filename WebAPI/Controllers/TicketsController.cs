@@ -4,6 +4,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.BugTicket;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
+using Infrastructure.Repositories;
+using Infrastructure.Interfaces;
+using Infrastructure.Entities;
 
 namespace WebAPI.Controllers;
 
@@ -13,12 +17,14 @@ public class TicketsController : Controller
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
 
-    public TicketsController(IMediator mediator, IMapper mapper)
+    public TicketsController(IMediator mediator, IMapper mapper, IUnitOfWork unitOfWork)
     {
         _mediator = mediator;
         _mapper = mapper;
+        _unitOfWork= unitOfWork;
     }
 
     [HttpPost]
@@ -26,7 +32,7 @@ public class TicketsController : Controller
     {
         var command = new CreateTicket() {
             Name = ticket.Name,
-            Asignee = ticket.Asignee,
+            Assignee = ticket.Asignee,
             Description = ticket.Description,
             Deadline = ticket.Deadline,
             Status = ticket.Status,
@@ -118,7 +124,7 @@ public class TicketsController : Controller
             TicketId = id,
             Description = ticket.Description,
             Name = ticket.Name,
-            Asignee= ticket.Asignee,
+            Assignee= ticket.Asignee,
             Deadline= ticket.Deadline,
             Status= ticket.Status,
             BoardId = ticket.BoardId,
@@ -131,5 +137,23 @@ public class TicketsController : Controller
             return NotFound();
 
         return Ok(result);
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Patch(Guid id,[FromBody] JsonPatchDocument<TicketEntity> ticketUpdates)
+    {
+        var ticket = await _unitOfWork.Tickets.GetById(id);
+
+        if (ticket == null)
+        {
+            return NotFound();
+        }
+
+        ticketUpdates.ApplyTo(ticket);
+        await _unitOfWork.Tickets.Update(ticket);
+
+        await _unitOfWork.CompleteAsync();
+
+        return Ok(ticket);
     }
 }

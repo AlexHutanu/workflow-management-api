@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using Infrastructure.Enums;
 
 namespace WebAPI.Models.BugTicket
 {
@@ -12,7 +13,7 @@ namespace WebAPI.Models.BugTicket
 
         public double Deadline { get; set; }
 
-        public string? Status { get; set; }
+        public TicketStatus Status { get; set; }
 
         public Guid BoardId { get; set; }
 

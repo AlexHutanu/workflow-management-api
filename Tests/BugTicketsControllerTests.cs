@@ -1,6 +1,8 @@
 ﻿using Application.Commands;
 using Application.Queries;
 using AutoMapper;
+using Infrastructure.Enums;
+using Infrastructure.Interfaces;
 using MediatR;
 using Moq;
 using System;
@@ -20,7 +22,7 @@ namespace Tests
 
         private readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
         private readonly Mock<IMapper> _mockMapper = new Mock<IMapper>();
-
+        private readonly Mock<IUnitOfWork> _mockUnitOfWork = new Mock<IUnitOfWork>();
         [TestMethod]
         public async Task GetAllBugTicketsIsCalled()
         {
@@ -28,7 +30,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<GetAllTickets>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
             await controller.Get();
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetAllTickets>(), It.IsAny<CancellationToken>()), Times.Once());
@@ -41,7 +43,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<GetTicket>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.GetById(Guid.NewGuid());
 
@@ -58,14 +60,14 @@ namespace Tests
                 Description = "Test",
                 Asignee = "Test",
                 Deadline = 0,
-                Status = "Test",
+                Status = TicketStatus.TODO,
             };
 
             _mockMediator
                 .Setup(m => m.Send(It.IsAny<CreateTicket>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.Post(newBugTicket);
 
@@ -81,7 +83,7 @@ namespace Tests
                 Description = "Test",
                 Asignee = "Test",
                 Deadline = 0, 
-                Status = "Test",
+                Status = TicketStatus.DONE,
 
             };
 
@@ -89,7 +91,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<UpdateTicket>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.Update(Guid.NewGuid(), newBugTicket);
 
@@ -103,7 +105,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<DeleteTicket>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new TicketsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.Delete(Guid.NewGuid());
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreaterelationbetweenUserandBoard : Migration
+    public partial class AddTicketStatus : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,7 +73,7 @@ namespace Infrastructure.Migrations
                     Reporter = table.Column<string>(type: "varchar(200)", nullable: true),
                     Description = table.Column<string>(type: "varchar(200)", nullable: true),
                     Deadline = table.Column<string>(type: "varchar(200)", nullable: false),
-                    Status = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     BoardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)

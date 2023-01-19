@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Infrastructure.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entities;
@@ -11,7 +12,7 @@ public class TicketEntity : BaseEntity
     public string? Name { get; set; }
 
     [Column("Asignee", TypeName = "varchar(200)")]
-    public string? Asignee { get; set; }
+    public string? Assignee { get; set; }
 
     [Column("Reporter", TypeName = "varchar(200)")]
     public string? Reporter { get; set; }
@@ -22,8 +23,8 @@ public class TicketEntity : BaseEntity
     [Column("Deadline", TypeName = "varchar(200)")]
     public double Deadline { get; set; }
 
-    [Column("Status", TypeName = "varchar(200)")]
-    public string? Status { get; set; }
+    [Column("Status", TypeName = "int")]
+    public TicketStatus Status { get; set; }
 
     public BoardEntity Board { get; set; }
 

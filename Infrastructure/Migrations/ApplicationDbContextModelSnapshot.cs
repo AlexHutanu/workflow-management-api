@@ -118,8 +118,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("Reporter");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("varchar(200)")
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
                         .HasColumnName("Status");
 
                     b.Property<string>("TimeCreated")

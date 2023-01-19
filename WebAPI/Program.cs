@@ -28,7 +28,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<Jwt>();
 builder.Services.AddEndpointsApiExplorer();

@@ -1,6 +1,7 @@
 using Application.Commands;
 using Application.Queries;
 using AutoMapper;
+using Infrastructure.Interfaces;
 using MediatR;
 using Moq;
 using WebAPI.Controllers;
@@ -13,6 +14,7 @@ namespace Tests
     {
         private readonly Mock<IMediator> _mockMediator = new Mock<IMediator>();
         private readonly Mock<IMapper> _mockMapper = new Mock<IMapper>();
+        private readonly Mock<IUnitOfWork> _mockUnitOfWork = new Mock<IUnitOfWork>();
 
         [TestMethod]
         public async Task GetAllBoardsIsCalled()
@@ -21,7 +23,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<GetAllBoards>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
             await controller.Get();
 
             _mockMediator.Verify(x => x.Send(It.IsAny<GetAllBoards>(), It.IsAny<CancellationToken>()), Times.Once());
@@ -34,7 +36,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<GetBoard>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.GetById(Guid.NewGuid());
 
@@ -55,7 +57,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<CreateBoard>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.Post(newBoard);
 
@@ -75,7 +77,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<UpdateBoard>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.Update(Guid.NewGuid(), board);
 
@@ -89,7 +91,7 @@ namespace Tests
                 .Setup(m => m.Send(It.IsAny<DeleteBoard>(), It.IsAny<CancellationToken>()))
                 .Verifiable();
 
-            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object);
+            var controller = new BoardsController(_mockMediator.Object, _mockMapper.Object, _mockUnitOfWork.Object);
 
             await controller.Delete(Guid.NewGuid());
         }
