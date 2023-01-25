@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.BugTicket
+namespace Application.Handlers.Ticket
 {
 
-    public class GetBugTicketHandler : IRequestHandler<GetTicket, Infrastructure.Entities.TicketEntity>
+    public class GetTicketHandler : IRequestHandler<GetTicket, Infrastructure.Entities.TicketEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetBugTicketHandler(IUnitOfWork unitOfWork)
+        public GetTicketHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

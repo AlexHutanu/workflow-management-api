@@ -3,7 +3,7 @@ using Infrastructure.Entities;
 using MediatR;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.BugTicket
+namespace Application.Handlers.Ticket
 {
 
     public class CreateTicketHandler : IRequestHandler<CreateTicket, Infrastructure.Entities.TicketEntity>
@@ -16,10 +16,10 @@ namespace Application.Handlers.BugTicket
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.TicketEntity> Handle(CreateTicket request, CancellationToken cancellationToken)
+        public async Task<TicketEntity> Handle(CreateTicket request, CancellationToken cancellationToken)
         {
 
-            var ticket = new Infrastructure.Entities.TicketEntity
+            var ticket = new TicketEntity
             {
                 Id = request.Id,
                 Name = request.Name,
@@ -29,7 +29,9 @@ namespace Application.Handlers.BugTicket
                 Deadline = request.Deadline,
                 Status = request.Status,
                 BoardId = request.BoardId,
-                UserId = request.UserId
+                UserId = request.UserId,
+                Type = request.Type,
+                Label = request.Label
             };
 
             await _unitOfWork.Tickets.Add(ticket);

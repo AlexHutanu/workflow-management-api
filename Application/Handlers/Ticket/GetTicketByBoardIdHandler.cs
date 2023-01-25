@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.BugTicket
+namespace Application.Handlers.Ticket
 {
     public class GetTicketByBoardIdHandler : IRequestHandler<GetTicketByBoardId, IEnumerable<Infrastructure.Entities.TicketEntity>>
     {

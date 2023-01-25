@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Infrastructure.Entities;
 using Infrastructure.Interfaces;
 
-namespace Application.Handlers.BugTicket
+namespace Application.Handlers.Ticket
 {
     public class GetAllTicketsHandler : IRequestHandler<GetAllTickets, IEnumerable<Infrastructure.Entities.TicketEntity>>
     {

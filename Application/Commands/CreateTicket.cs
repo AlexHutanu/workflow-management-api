@@ -11,7 +11,7 @@ namespace Application.Commands
 
         public string? Name { get; set; }
 
-        public string? Assignee { get; set; }
+        public Guid Assignee { get; set; }
 
         public string? Reporter { get; set; }
 
@@ -20,6 +20,10 @@ namespace Application.Commands
         public double Deadline { get; set; }
 
         public TicketStatus Status { get; set; }
+
+        public TicketType Type { get; set; }
+
+        public TicketLabel Label { get; set; }
 
         public Guid BoardId { get; set; }
 

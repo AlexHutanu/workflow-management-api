@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTicketStatus : Migration
+    public partial class Recreateticketentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,11 +69,13 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "varchar(200)", nullable: true),
-                    Asignee = table.Column<string>(type: "varchar(200)", nullable: true),
+                    Asignee = table.Column<string>(type: "varchar(200)", nullable: false),
                     Reporter = table.Column<string>(type: "varchar(200)", nullable: true),
                     Description = table.Column<string>(type: "varchar(200)", nullable: true),
                     Deadline = table.Column<string>(type: "varchar(200)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Label = table.Column<int>(type: "int", nullable: false),
                     BoardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TimeCreated = table.Column<string>(type: "varchar(200)", nullable: false)

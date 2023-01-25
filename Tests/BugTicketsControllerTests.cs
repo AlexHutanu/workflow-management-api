@@ -58,7 +58,7 @@ namespace Tests
             {
                 Name = "TestBugTicket",
                 Description = "Test",
-                Asignee = "Test",
+                Assignee = "Test",
                 Deadline = 0,
                 Status = TicketStatus.TODO,
             };
@@ -81,7 +81,7 @@ namespace Tests
             {
                 Name = "TestBugTicket",
                 Description = "Test",
-                Asignee = "Test",
+                Assignee = "Test",
                 Deadline = 0, 
                 Status = TicketStatus.DONE,
 

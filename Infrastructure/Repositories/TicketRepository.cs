@@ -26,5 +26,10 @@ namespace Infrastructure.Repositories
         {
             return await dbSet.Where(ticket => ticket.Name.Contains(name)).ToListAsync();
         }
+
+        public async Task<IEnumerable<TicketEntity>> GetByUserId(Guid userId)
+        {
+            return await dbSet.Where(ticket => ticket.Assignee == userId).ToListAsync();
+        }
     }
 }

@@ -94,7 +94,8 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Asignee")
+                    b.Property<string>("Assignee")
+                        .IsRequired()
                         .HasColumnType("varchar(200)")
                         .HasColumnName("Asignee");
 
@@ -109,6 +110,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("varchar(200)")
                         .HasColumnName("Description");
+
+                    b.Property<int>("Label")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("varchar(200)")
@@ -126,6 +130,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(200)")
                         .HasColumnName("TimeCreated");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.BugTicket
+namespace Application.Handlers.Ticket
 {
     public class DeleteTicketHandler : IRequestHandler<DeleteTicket, Infrastructure.Entities.TicketEntity>
     {

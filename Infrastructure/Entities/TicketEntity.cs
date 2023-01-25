@@ -12,7 +12,7 @@ public class TicketEntity : BaseEntity
     public string? Name { get; set; }
 
     [Column("Asignee", TypeName = "varchar(200)")]
-    public string? Assignee { get; set; }
+    public Guid Assignee { get; set; }
 
     [Column("Reporter", TypeName = "varchar(200)")]
     public string? Reporter { get; set; }
@@ -25,6 +25,10 @@ public class TicketEntity : BaseEntity
 
     [Column("Status", TypeName = "int")]
     public TicketStatus Status { get; set; }
+
+    public TicketType Type { get; set; }
+
+    public TicketLabel Label { get; set; }
 
     public BoardEntity Board { get; set; }
 

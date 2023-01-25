@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Handlers.BugTicket
+namespace Application.Handlers.Ticket
 {
     public class UpdateTicketHandler : IRequestHandler<UpdateTicket, Infrastructure.Entities.TicketEntity>
     {
@@ -31,6 +31,8 @@ namespace Application.Handlers.BugTicket
             toUpdate.Status = request.Status;
             toUpdate.BoardId = request.BoardId;
             toUpdate.UserId = request.UserId;
+            toUpdate.Type = request.Type;
+            toUpdate.Label = request.Label;
 
 
 

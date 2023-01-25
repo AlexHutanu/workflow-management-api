@@ -8,7 +8,7 @@ namespace WebAPI.Models.Board
 
         public string? Name { get; set; }
 
-        public string? Owner { get; set; }
+        public Guid Owner { get; set; }
 
         public string? Description { get; set; }
 

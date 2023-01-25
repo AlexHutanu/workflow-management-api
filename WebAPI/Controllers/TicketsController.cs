@@ -32,12 +32,15 @@ public class TicketsController : Controller
     {
         var command = new CreateTicket() {
             Name = ticket.Name,
-            Assignee = ticket.Asignee,
+            Assignee = ticket.Assignee,
             Description = ticket.Description,
             Deadline = ticket.Deadline,
             Status = ticket.Status,
+            Type = ticket.Type,
+            Label = ticket.Label,
             BoardId = ticket.BoardId,
-            UserId = ticket.UserId
+            UserId = ticket.UserId,
+            Reporter = ticket.Reporter
         };
 
         var result = await _mediator.Send(command);
@@ -65,6 +68,21 @@ public class TicketsController : Controller
     public async Task<IActionResult> GetByBoardId(Guid boardId)
     {
         var result = await _mediator.Send(new GetTicketByBoardId(boardId));
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<List<ReadTicketModel>>(result);
+
+        return Ok(mappedResult);
+    }
+
+    [HttpGet("{userId}/usertickets")]
+    public async Task<IActionResult> GetByUserId(Guid userId)
+    {
+        var result = await _mediator.Send(new GetTicketByUserId(userId));
 
         if (result == null)
         {
@@ -124,11 +142,13 @@ public class TicketsController : Controller
             TicketId = id,
             Description = ticket.Description,
             Name = ticket.Name,
-            Assignee= ticket.Asignee,
-            Deadline= ticket.Deadline,
-            Status= ticket.Status,
+            Assignee = ticket.Assignee,
+            Deadline = ticket.Deadline,
+            Status = ticket.Status,
             BoardId = ticket.BoardId,
-            UserId = ticket.UserId
+            UserId = ticket.UserId,
+            Type = ticket.Type,
+            Label = ticket.Label
         };
 
         var result = await _mediator.Send(command);
@@ -142,6 +162,7 @@ public class TicketsController : Controller
     [HttpPatch("{id}")]
     public async Task<IActionResult> Patch(Guid id,[FromBody] JsonPatchDocument<TicketEntity> ticketUpdates)
     {
+
         var ticket = await _unitOfWork.Tickets.GetById(id);
 
         if (ticket == null)
@@ -154,6 +175,7 @@ public class TicketsController : Controller
 
         await _unitOfWork.CompleteAsync();
 
-        return Ok(ticket);
+        return Ok(ticket); 
+
     }
 }
