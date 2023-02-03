@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Infrastructure.Entities;
+using Domain.Entities;
 using WebAPI.Models.ActivityDtos;
 
 namespace WebAPI.Profiles

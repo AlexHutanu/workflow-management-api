@@ -1,5 +1,5 @@
 ﻿using Application.Queries;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using System;

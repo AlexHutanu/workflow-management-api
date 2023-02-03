@@ -1,5 +1,5 @@
 using Application.Queries;
-using Infrastructure.Entities;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
@@ -8,7 +8,7 @@ using Infrastructure.Interfaces;
 namespace Application.Handlers.Ticket
 {
 
-    public class GetTicketHandler : IRequestHandler<GetTicket, Infrastructure.Entities.TicketEntity>
+    public class GetTicketHandler : IRequestHandler<GetTicket, TicketEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +18,7 @@ namespace Application.Handlers.Ticket
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.TicketEntity> Handle(GetTicket request, CancellationToken cancellationToken)
+        public async Task<TicketEntity> Handle(GetTicket request, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Tickets.GetById(request.Id);
         }

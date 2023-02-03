@@ -1,5 +1,5 @@
 ﻿using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.Activity
 {
-    public class UpdateActivityHandler : IRequestHandler<UpdateActivity, Infrastructure.Entities.ActivityEntity>
+    public class UpdateActivityHandler : IRequestHandler<UpdateActivity, ActivityEntity>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,9 +19,9 @@ namespace Application.Handlers.Activity
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.ActivityEntity> Handle(UpdateActivity request, CancellationToken cancellationToken)
+        public async Task<ActivityEntity> Handle(UpdateActivity request, CancellationToken cancellationToken)
         {
-            var updatedActivity = new Infrastructure.Entities.ActivityEntity();
+            var updatedActivity = new ActivityEntity();
 
             updatedActivity.Id = request.ActivityId;
             updatedActivity.Name = request.Name;

@@ -1,5 +1,5 @@
 ﻿using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.Board
 {
-    public class UpdateBoardHandler : IRequestHandler<UpdateBoard, Infrastructure.Entities.BoardEntity>
+    public class UpdateBoardHandler : IRequestHandler<UpdateBoard, BoardEntity>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,9 +19,9 @@ namespace Application.Handlers.Board
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.BoardEntity> Handle(UpdateBoard request, CancellationToken cancellationToken)
+        public async Task<BoardEntity> Handle(UpdateBoard request, CancellationToken cancellationToken)
         {
-            var toUpdate = new Infrastructure.Entities.BoardEntity();
+            var toUpdate = new BoardEntity();
 
             toUpdate.Description = request.Description;
             toUpdate.Name = request.Name;

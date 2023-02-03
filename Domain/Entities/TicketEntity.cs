@@ -1,8 +1,8 @@
-﻿using Infrastructure.Enums;
+﻿using Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Infrastructure.Entities;
+namespace Domain.Entities;
 
 
 public class TicketEntity : BaseEntity

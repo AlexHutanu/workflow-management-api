@@ -1,6 +1,6 @@
 ﻿using Application.Queries;
 using Infrastructure.Data;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.Ticket
 {
-    public class GetTicketByBoardIdHandler : IRequestHandler<GetTicketByBoardId, IEnumerable<Infrastructure.Entities.TicketEntity>>
+    public class GetTicketByBoardIdHandler : IRequestHandler<GetTicketByBoardId, IEnumerable<TicketEntity>>
     {
 
         private readonly IUnitOfWork _unitOfWork;

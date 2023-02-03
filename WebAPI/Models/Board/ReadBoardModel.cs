@@ -1,4 +1,4 @@
-﻿using Infrastructure.Entities;
+﻿using Domain.Entities;
 
 namespace WebAPI.Models.Board
 {
@@ -16,7 +16,7 @@ namespace WebAPI.Models.Board
 
         public Guid UserId { get; set; }
 
-        public ICollection<Infrastructure.Entities.TicketEntity> BugTickets { get; set; }
+        public ICollection<TicketEntity> BugTickets { get; set; }
     }
 }
 

@@ -1,5 +1,5 @@
 ﻿using Infrastructure.Data;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;

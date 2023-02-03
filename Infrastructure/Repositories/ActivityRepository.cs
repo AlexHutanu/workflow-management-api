@@ -1,5 +1,5 @@
 ﻿using Infrastructure.Data;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

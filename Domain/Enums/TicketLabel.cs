@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Enums
+namespace Domain.Enums
 {
-    public enum TicketType
+    public enum TicketLabel
     {
-        BUG_TICKET = 0,
-        TO_DO = 1,
-        FEATURE_REQUEST = 2
-
+        FRONT_END = 0,
+        BACK_END = 1
     }
 }

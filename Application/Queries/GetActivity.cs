@@ -1,4 +1,5 @@
-using Infrastructure.Entities;
+
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Queries

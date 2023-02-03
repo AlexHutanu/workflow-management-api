@@ -1,12 +1,12 @@
 using Application.Queries;
-using Infrastructure.Entities;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
 
 namespace Application.Handlers.Board
 {
-    public class GetBoardHandler : IRequestHandler<GetBoard, Infrastructure.Entities.BoardEntity>
+    public class GetBoardHandler : IRequestHandler<GetBoard, BoardEntity>
     {
         private readonly ApplicationDbContext _context;
 
@@ -15,7 +15,7 @@ namespace Application.Handlers.Board
             _context = context;
         }
 
-        public async Task<Infrastructure.Entities.BoardEntity> Handle(GetBoard request, CancellationToken cancellationToken)
+        public async Task<BoardEntity> Handle(GetBoard request, CancellationToken cancellationToken)
         {
             return await _context.Boards.FirstAsync(board => board.Id == request.Id, cancellationToken: cancellationToken);
         }

@@ -1,5 +1,5 @@
 ﻿using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.Ticket
 {
-    public class DeleteTicketHandler : IRequestHandler<DeleteTicket, Infrastructure.Entities.TicketEntity>
+    public class DeleteTicketHandler : IRequestHandler<DeleteTicket, TicketEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace Application.Handlers.Ticket
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.TicketEntity> Handle(DeleteTicket request, CancellationToken cancellationToken)
+        public async Task<TicketEntity> Handle(DeleteTicket request, CancellationToken cancellationToken)
         {
             var ticket = await _unitOfWork.Tickets.GetById(request.TicketId);
 

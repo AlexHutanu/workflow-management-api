@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Infrastructure.Entities;
+using Domain.Entities;
 using System.Security.Cryptography.Xml;
 using WebAPI.Models.User;
 

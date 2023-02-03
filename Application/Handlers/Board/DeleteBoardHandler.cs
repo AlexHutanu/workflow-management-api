@@ -1,5 +1,5 @@
 ﻿using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.Board
 {
-    public class DeleteBoardHandler : IRequestHandler<DeleteBoard, Infrastructure.Entities.BoardEntity>
+    public class DeleteBoardHandler : IRequestHandler<DeleteBoard, BoardEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -20,7 +20,7 @@ namespace Application.Handlers.Board
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.BoardEntity> Handle(DeleteBoard request, CancellationToken cancellationToken)
+        public async Task<BoardEntity> Handle(DeleteBoard request, CancellationToken cancellationToken)
         {
             var board = await _unitOfWork.Boards.GetById(request.BoardId);
 

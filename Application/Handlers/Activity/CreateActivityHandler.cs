@@ -1,5 +1,5 @@
 
-using Infrastructure.Entities;
+using Domain.Entities;
 using MediatR;
 using Infrastructure.Interfaces;
 
@@ -7,7 +7,7 @@ namespace Application.Handlers.Activity
 {
 
 
-    public class CreateActivityHandler : IRequestHandler<Commands.Activity, Infrastructure.Entities.ActivityEntity>
+    public class CreateActivityHandler : IRequestHandler<Commands.Activity, ActivityEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;

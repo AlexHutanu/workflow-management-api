@@ -1,5 +1,5 @@
 using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using MediatR;
 using Infrastructure.Data;
 using Infrastructure.Interfaces;
@@ -7,7 +7,7 @@ using Infrastructure.Interfaces;
 namespace Application.Handlers.Board
 {
 
-    public class CreateBoardHandler : IRequestHandler<CreateBoard, Infrastructure.Entities.BoardEntity>
+    public class CreateBoardHandler : IRequestHandler<CreateBoard, BoardEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -17,9 +17,9 @@ namespace Application.Handlers.Board
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.BoardEntity> Handle(CreateBoard request, CancellationToken cancellationToken)
+        public async Task<BoardEntity> Handle(CreateBoard request, CancellationToken cancellationToken)
         {
-            var board = new Infrastructure.Entities.BoardEntity
+            var board = new BoardEntity
             {
                 Id = request.Id,
                 Name = request.Name,

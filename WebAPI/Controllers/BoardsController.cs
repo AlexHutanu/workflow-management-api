@@ -1,7 +1,7 @@
 ﻿using Application.Commands;
 using Application.Queries;
 using AutoMapper;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Cors;

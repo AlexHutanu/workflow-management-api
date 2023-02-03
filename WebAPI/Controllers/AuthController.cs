@@ -1,7 +1,7 @@
 ﻿using Application.Commands;
 using AutoMapper;
 using Azure.Core;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +43,13 @@ namespace WebAPI.Controllers
             var result = await _mediator.Send(command);
             var mappedResult = _mapper.Map<ReadUserModel>(result);
 
-            return Ok(mappedResult);
+            var jwt = _jwt.Generate(command.Id);
+
+            return Ok(new
+            {
+                message = "Success",
+                token = jwt
+            });
 
         }
 

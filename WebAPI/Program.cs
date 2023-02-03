@@ -1,7 +1,7 @@
 using Application.Handlers;
 using Application.Handlers.Activity;
 using Infrastructure.Data;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using Infrastructure.Repositories;
 using MediatR;

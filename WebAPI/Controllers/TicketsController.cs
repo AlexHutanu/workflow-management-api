@@ -7,7 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Infrastructure.Repositories;
 using Infrastructure.Interfaces;
-using Infrastructure.Entities;
+using Domain.Entities;
 
 namespace WebAPI.Controllers;
 

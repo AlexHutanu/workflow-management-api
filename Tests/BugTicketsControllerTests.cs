@@ -1,7 +1,7 @@
 ﻿using Application.Commands;
 using Application.Queries;
 using AutoMapper;
-using Infrastructure.Enums;
+using Domain.Enums;
 using Infrastructure.Interfaces;
 using MediatR;
 using Moq;
@@ -58,7 +58,7 @@ namespace Tests
             {
                 Name = "TestBugTicket",
                 Description = "Test",
-                Assignee = "Test",
+                Assignee = Guid.NewGuid(),
                 Deadline = 0,
                 Status = TicketStatus.TODO,
             };
@@ -81,7 +81,7 @@ namespace Tests
             {
                 Name = "TestBugTicket",
                 Description = "Test",
-                Assignee = "Test",
+                Assignee = Guid.NewGuid(),
                 Deadline = 0, 
                 Status = TicketStatus.DONE,
 

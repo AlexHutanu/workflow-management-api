@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 
 namespace Application.Handlers.User
 {
-    public class DeleteUserHandler : IRequestHandler<DeleteUser, Infrastructure.Entities.UserEntity>
+    public class DeleteUserHandler : IRequestHandler<DeleteUser, UserEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -20,7 +20,7 @@ namespace Application.Handlers.User
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.UserEntity> Handle(DeleteUser request, CancellationToken cancellationToken)
+        public async Task<UserEntity> Handle(DeleteUser request, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.Users.GetById(request.UserId);
 

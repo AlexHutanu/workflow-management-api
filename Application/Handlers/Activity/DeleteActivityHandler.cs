@@ -1,5 +1,5 @@
 ﻿using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.Activity
 {
-    public class DeleteActivityHandler : IRequestHandler<DeleteActivity, Infrastructure.Entities.ActivityEntity>
+    public class DeleteActivityHandler : IRequestHandler<DeleteActivity, ActivityEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace Application.Handlers.Activity
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.ActivityEntity> Handle(DeleteActivity request, CancellationToken cancellationToken)
+        public async Task<ActivityEntity> Handle(DeleteActivity request, CancellationToken cancellationToken)
         {
             var activity = await _unitOfWork.Activities.GetById(request.ActivityId);
 

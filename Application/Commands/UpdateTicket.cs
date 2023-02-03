@@ -1,5 +1,5 @@
-﻿using Infrastructure.Entities;
-using Infrastructure.Enums;
+﻿using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 
 namespace Application.Commands

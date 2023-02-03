@@ -1,12 +1,12 @@
 using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using MediatR;
 using Infrastructure.Interfaces;
 
 namespace Application.Handlers.Ticket
 {
 
-    public class CreateTicketHandler : IRequestHandler<CreateTicket, Infrastructure.Entities.TicketEntity>
+    public class CreateTicketHandler : IRequestHandler<CreateTicket, TicketEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;

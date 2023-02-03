@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Queries;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 
 namespace Application.Handlers.Activity
 {
-    public class GetAllActivitiesHandler : IRequestHandler<GetAllActivities, IEnumerable<Infrastructure.Entities.ActivityEntity>>
+    public class GetAllActivitiesHandler : IRequestHandler<GetAllActivities, IEnumerable<ActivityEntity>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace Application.Handlers.Activity
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Infrastructure.Entities.ActivityEntity>> Handle(GetAllActivities request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ActivityEntity>> Handle(GetAllActivities request, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Activities.GetAll();
         }

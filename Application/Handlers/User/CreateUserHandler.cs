@@ -1,5 +1,5 @@
 using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using MediatR;
 using Infrastructure.Data;
 using Infrastructure.Interfaces;
@@ -7,7 +7,7 @@ using Infrastructure.Interfaces;
 namespace Application.Handlers.User
 {
 
-    public class CreateUserHandler : IRequestHandler<CreateUser, Infrastructure.Entities.UserEntity>
+    public class CreateUserHandler : IRequestHandler<CreateUser, UserEntity>
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -17,9 +17,9 @@ namespace Application.Handlers.User
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.UserEntity> Handle(CreateUser request, CancellationToken cancellationToken)
+        public async Task<UserEntity> Handle(CreateUser request, CancellationToken cancellationToken)
         {
-            var user = new Infrastructure.Entities.UserEntity {
+            var user = new UserEntity {
                 Id = request.Id,
                 Name = request.Name,
                 Email = request.Email,

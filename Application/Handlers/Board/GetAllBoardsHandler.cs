@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 
 namespace Application.Handlers.Board
 {
-    public class GetAllBoardsHandler : IRequestHandler<GetAllBoards, IEnumerable<Infrastructure.Entities.BoardEntity>>
+    public class GetAllBoardsHandler : IRequestHandler<GetAllBoards, IEnumerable<BoardEntity>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,7 +19,7 @@ namespace Application.Handlers.Board
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Infrastructure.Entities.BoardEntity>> Handle(GetAllBoards request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<BoardEntity>> Handle(GetAllBoards request, CancellationToken cancellationToken)
         {
             return await _unitOfWork.Boards.GetAll();
         }

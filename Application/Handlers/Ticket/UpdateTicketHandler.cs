@@ -1,5 +1,5 @@
 ﻿using Application.Commands;
-using Infrastructure.Entities;
+using Domain.Entities;
 using Infrastructure.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Handlers.Ticket
 {
-    public class UpdateTicketHandler : IRequestHandler<UpdateTicket, Infrastructure.Entities.TicketEntity>
+    public class UpdateTicketHandler : IRequestHandler<UpdateTicket, TicketEntity>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -19,9 +19,9 @@ namespace Application.Handlers.Ticket
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Infrastructure.Entities.TicketEntity> Handle(UpdateTicket request, CancellationToken cancellationToken)
+        public async Task<TicketEntity> Handle(UpdateTicket request, CancellationToken cancellationToken)
         {
-            var toUpdate = new Infrastructure.Entities.TicketEntity();
+            var toUpdate = new TicketEntity();
 
             toUpdate.Id = request.TicketId;
             toUpdate.Name = request.Name;
